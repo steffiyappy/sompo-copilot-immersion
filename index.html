@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contoso General Assurance Indonesia · M365 Copilot Immersion</title>
+<style>
+:root{
+  --red-900:#7a0d20; --red-700:#a30d24; --red-500:#C8102E; --red-400:#dc2f4a;
+  --red-300:#ef4444; --red-100:#fecaca; --red-50:#fef2f2;
+  --ink:#2A2A2A; --charcoal:#1a1a1a;
+  --coral:#ff6b6b; --gold:#f9b233;
+  --bg:#faf6f0; --panel:#ffffff; --panel2:#fdfaf5;
+  --text:#2A2A2A; --muted:#6b6f76; --border:#e6dfd3; --border-strong:#d4c9b5;
+  --good:#2e7d32; --warn:#ed6c02;
+  --code-bg:#fdf7ee;
+  --g-goal:#DC2626; --g-ctx:#2563EB; --g-src:#9333EA; --g-exp:#16A34A;
+  --badge-bg:#fef2f2;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:18px}
+
+/* ============ HERO ============ */
+header.hero{
+  background:linear-gradient(135deg,var(--red-900) 0%,var(--red-500) 60%,var(--red-400) 100%);
+  color:#fff;padding:22px 28px 34px;position:relative;overflow:hidden
+}
+header.hero::before{content:'';position:absolute;right:-100px;top:-50px;width:400px;height:400px;background:rgba(255,255,255,.06);border-radius:50%}
+header.hero::after{content:'';position:absolute;right:80px;bottom:-80px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
+.hero-inner{max-width:none;margin:0 auto;position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.hero-brand{display:flex;align-items:center;gap:18px}
+.hero-logo{width:72px;height:72px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.22);flex-shrink:0}
+.hero-logo svg{width:56px;height:56px;display:block}
+.hero-brand h1{margin:0;font-size:17px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.85}
+.hero-brand h2{margin:0;font-size:26px;font-weight:700}
+.hero-brand .brand-rule{width:1px;height:46px;background:rgba(255,255,255,.28);margin:0 2px}
+.hero-meta{font-size:17px;opacity:.9;text-align:right}
+.hero-meta .pill{display:inline-block;padding:4px 12px;background:rgba(255,255,255,.18);border-radius:12px;margin-left:8px;font-weight:600}
+.hero-title{max-width:none;margin:18px auto 0;position:relative;z-index:2}
+.hero-title h3{margin:0 0 8px 0;font-size:28px;font-weight:700;line-height:1.2}
+.hero-title p{margin:0;font-size:17px;opacity:.94}
+
+/* ============ PROGRESS BAR ============ */
+.progress-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:10px 28px;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.progress-inner{max-width:none;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.progress-text{font-size:17px;color:var(--muted)}
+.progress-text strong{color:var(--red-700)}
+.progress-track{flex:1;max-width:400px;height:8px;background:var(--red-50);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--red-500),var(--red-300));width:0%;transition:width .4s ease}
+.reset-progress{background:transparent;border:1px solid var(--border);color:var(--muted);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
+.reset-progress:hover{background:var(--red-50);color:var(--red-700);border-color:var(--red-300)}
+
+/* ============ TABS ============ */
+nav.tabs{max-width:none;margin:0 auto;padding:0 28px;background:var(--bg);display:flex;gap:2px;border-bottom:2px solid var(--red-100);flex-wrap:wrap}
+.tab{padding:12px 14px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:17px;font-weight:600;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:all .2s;font-family:inherit;flex:1 1 auto;justify-content:center}
+.tab:hover{color:var(--red-700);background:var(--red-50)}
+.tab.active{color:var(--red-700);border-bottom-color:var(--red-500);background:var(--panel)}
+.tab .tab-num{width:22px;height:22px;background:var(--red-100);color:var(--red-700);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.tab.active .tab-num{background:var(--red-500);color:#fff}
+.tab.done .tab-num{background:var(--good);color:#fff}
+
+main{max-width:none;margin:0;padding:24px 40px}
+.view{display:none;animation:fadeIn .4s ease}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============ INTRO CARDS ============ */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}
+@media(max-width:850px){.intro-grid{grid-template-columns:1fr}}
+.info-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:24px}
+.info-card h4{margin:0 0 12px;font-size:18px;color:var(--red-700);display:flex;align-items:center;gap:10px}
+.info-card h4 .icon{width:32px;height:32px;border-radius:50%;background:var(--red-100);color:var(--red-700);display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.info-card ul{margin:8px 0;padding-left:20px;font-size:18px}
+.info-card li{margin-bottom:6px;color:var(--text)}
+.info-card li strong{color:var(--red-700)}
+
+/* ============ USE CASE HEADER ============ */
+.uc-header{background:linear-gradient(135deg,var(--red-50),#fff5eb);border:1px solid var(--red-100);border-radius:16px;padding:28px 32px;margin-bottom:24px;display:flex;align-items:flex-start;gap:20px}
+.uc-badge{background:var(--red-500);color:#fff;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0}
+.uc-header h2{margin:0 0 6px;font-size:26px;color:var(--red-900)}
+.uc-header .uc-sub{font-size:17px;color:var(--red-700);margin:0 0 12px}
+.uc-tags{display:flex;gap:8px;flex-wrap:wrap}
+.uc-tag{background:#fff;color:var(--red-700);padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;border:1px solid var(--red-100)}
+.uc-tag.duration{background:var(--gold);color:#fff;border-color:var(--gold)}
+.uc-tag.level{background:var(--coral);color:#fff;border-color:var(--coral)}
+
+/* ============ SCENARIO ============ */
+.scenario{background:linear-gradient(135deg,#fff5f5,#ffe8e8);border-left:4px solid var(--coral);border-radius:8px;padding:16px 20px;margin:20px 0}
+.scenario .label{font-size:12px;font-weight:700;color:var(--coral);letter-spacing:1.5px;margin-bottom:6px}
+.scenario .body{font-size:18px;color:var(--text)}
+.scenario .body strong{color:var(--red-700)}
+
+/* ============ STEPS ============ */
+.steps{margin:24px 0}
+.step{display:flex;gap:20px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;transition:border-color .2s,box-shadow .2s;position:relative}
+.step:hover{border-color:var(--red-300);box-shadow:0 4px 16px rgba(200,16,46,.08)}
+.step.completed{background:linear-gradient(135deg,#f0faf3,#ffffff);border-color:var(--good)}
+.step-num{width:40px;height:40px;background:var(--red-500);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}
+.step.completed .step-num{background:var(--good)}
+.step.completed .step-num::after{content:'✓';font-size:20px}
+.step.completed .step-num span{display:none}
+.step-body{flex:1;min-width:0}
+.step-body h4{margin:6px 0 8px;font-size:17px;color:var(--text)}
+.step-body p{margin:0 0 10px;font-size:18px;color:var(--text)}
+.step-body ul{margin:8px 0;padding-left:20px;font-size:18px}
+.step-body li{margin-bottom:4px}
+.step-check{position:absolute;right:16px;top:16px;width:24px;height:24px;border:2px solid var(--border-strong);border-radius:6px;background:#fff;cursor:pointer;transition:all .2s}
+.step-check:hover{border-color:var(--red-500)}
+.step.completed .step-check{background:var(--good);border-color:var(--good)}
+.step.completed .step-check::after{content:'✓';color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%}
+.step-body .kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.2px;color:var(--red-700);background:var(--red-50);border:1px solid var(--red-100);padding:2px 8px;border-radius:4px;margin-bottom:4px;text-transform:uppercase}
+.premium-pill{display:inline-block;background:var(--red-500);color:#fff;font-size:12px;font-weight:700;letter-spacing:1.2px;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:middle}
+
+/* ============ NAV PATH ============ */
+.nav-path{background:var(--red-50);border:1px dashed var(--red-300);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:17px;color:var(--red-900)}
+.nav-path .arrow{color:var(--red-500);margin:0 6px;font-weight:700}
+.nav-path .step-pill{display:inline-block;background:#fff;padding:3px 10px;border-radius:12px;border:1px solid var(--red-300);font-weight:600;font-size:12px;margin:2px 0}
+.nav-path .label{font-size:12px;font-weight:700;color:var(--red-700);letter-spacing:1.5px;display:block;margin-bottom:6px}
+
+/* ============ PROMPTS (plain and gcse share base) ============ */
+.prompt,.prompt-plain,.prompt-gcse{
+  position:relative;background:var(--code-bg);border:1px solid var(--red-100);border-left:4px solid var(--red-500);
+  border-radius:6px;padding:14px 84px 14px 18px;margin:10px 0;
+  font-family:'Consolas','Courier New',monospace;font-size:17px;color:var(--red-900);
+  white-space:pre-wrap;line-height:1.65;overflow-wrap:break-word
+}
+.prompt .copy,.copy-btn{position:absolute;top:10px;right:10px;background:var(--red-500);color:#fff;border:none;padding:4px 10px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Segoe UI',sans-serif;transition:background .2s}
+.copy-btn:hover{background:var(--red-700)}
+.copy-btn.copied{background:var(--good)}
+.prompt .label,.plabel{font-size:12px;font-weight:700;color:var(--red-700);letter-spacing:1.5px;margin-bottom:6px;display:block;font-family:'Segoe UI',sans-serif}
+
+/* GCSE colour spans (kept as-is) */
+.prompt-gcse .g,.prompt-gcse .c,.prompt-gcse .s,.prompt-gcse .e,
+.prompt .g,.prompt .c,.prompt .s,.prompt .e{padding:2px 6px;border-radius:4px;display:inline}
+.prompt-gcse .lbl,.prompt .lbl{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:1px 6px;border-radius:3px;margin-right:6px;vertical-align:1px;color:#fff}
+.prompt-gcse .g,.prompt .g{background:rgba(220,38,38,.14);color:var(--g-goal);box-shadow:inset 2px 0 0 var(--g-goal)}
+.prompt-gcse .g .lbl,.prompt .g .lbl{background:var(--g-goal)}
+.prompt-gcse .c,.prompt .c{background:rgba(37,99,235,.14);color:var(--g-ctx);box-shadow:inset 2px 0 0 var(--g-ctx)}
+.prompt-gcse .c .lbl,.prompt .c .lbl{background:var(--g-ctx)}
+.prompt-gcse .s,.prompt .s{background:rgba(147,51,234,.14);color:var(--g-src);box-shadow:inset 2px 0 0 var(--g-src)}
+.prompt-gcse .s .lbl,.prompt .s .lbl{background:var(--g-src)}
+.prompt-gcse .e,.prompt .e{background:rgba(22,163,74,.14);color:var(--g-exp);box-shadow:inset 2px 0 0 var(--g-exp)}
+.prompt-gcse .e .lbl,.prompt .e .lbl{background:var(--g-exp)}
+
+/* Language labels */
+.prompt-lang{display:flex;align-items:center;gap:10px;margin:14px 0 4px;font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
+.prompt-lang::after{content:"";flex:1;height:1px;background:var(--border)}
+.prompt-lang.bi{color:var(--red-700)}
+.prompt-lang.en{color:var(--muted)}
+.prompt-lang .flag{display:inline-block;font-size:17px}
+
+/* Prompt mode toggle (per-tab) */
+.mode-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 16px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;margin:0 0 16px}
+.mode-bar .lbl{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.gcse-toggle{display:inline-flex;background:#fff;border:1px solid var(--border);border-radius:999px;padding:3px;gap:0}
+.gcse-toggle button{background:transparent;border:none;color:var(--muted);font:600 12px/1 'Segoe UI',sans-serif;padding:7px 14px;border-radius:999px;cursor:pointer;letter-spacing:.3px}
+.gcse-toggle button.on{background:var(--red-500);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.mode-bar .legend{display:flex;gap:8px;font-size:12px;flex-wrap:wrap}
+.mode-bar .legend span{padding:3px 9px;border-radius:5px;font-weight:700;letter-spacing:.3px}
+.mode-bar .legend .l-g{background:rgba(220,38,38,.14);color:var(--g-goal);border:1px solid var(--g-goal)}
+.mode-bar .legend .l-c{background:rgba(37,99,235,.14);color:var(--g-ctx);border:1px solid var(--g-ctx)}
+.mode-bar .legend .l-s{background:rgba(147,51,234,.14);color:var(--g-src);border:1px solid var(--g-src)}
+.mode-bar .legend .l-e{background:rgba(22,163,74,.14);color:var(--g-exp);border:1px solid var(--g-exp)}
+body:not(.gcse) .mode-bar .legend{display:none}
+body:not(.gcse) .prompt-gcse{display:none}
+body.gcse .prompt-plain{display:none}
+
+/* ============ DOWNLOAD GRID ============ */
+.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:700px){.download-grid{grid-template-columns:1fr}}
+.download-card{background:linear-gradient(135deg,#fff5eb,#fdf7ee);border:1px solid var(--red-300);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--text);transition:all .2s}
+.download-card:hover{border-color:var(--red-500);box-shadow:0 4px 16px rgba(200,16,46,.15);transform:translateY(-2px)}
+.download-card .file-icon{width:48px;height:48px;background:var(--red-500);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}
+.download-card .file-icon.xl{background:var(--good)}
+.download-card .file-info{flex:1;min-width:0}
+.download-card .file-name{font-weight:700;color:var(--red-900);font-size:17px;word-break:break-word}
+.download-card .file-desc{font-size:12px;color:var(--muted);margin-top:2px}
+.download-card .dl-arrow{color:var(--red-500);font-size:22px;font-weight:700}
+
+/* ============ TIPS / WARNINGS ============ */
+.tip,.warn{border-radius:8px;padding:12px 16px;margin:12px 0;font-size:17px;display:flex;gap:12px;align-items:flex-start}
+.tip{background:#e8f5e9;border-left:4px solid var(--good);color:#1b5e20}
+.warn{background:#fff3e0;border-left:4px solid var(--warn);color:#5d4037}
+.tip .icon,.warn .icon{font-size:18px;flex-shrink:0}
+.tip strong,.warn strong{display:block;margin-bottom:2px}
+
+/* ============ SECTION SEPARATORS ============ */
+.section-sep{margin:32px 0 20px;padding-bottom:8px;border-bottom:2px solid var(--red-100);font-size:17px;font-weight:700;letter-spacing:1.5px;color:var(--red-700);text-transform:uppercase}
+.section-sep.premium{background:linear-gradient(135deg,var(--red-50),#fff5eb);padding:16px 20px;border-radius:10px;border:1px solid var(--red-300);border-bottom:none;color:var(--red-900);font-size:18px;display:flex;align-items:center;gap:10px}
+.section-sep.premium::before{content:'★';color:var(--red-500);font-size:18px}
+
+/* ============ COMPLETE BANNER ============ */
+.complete-banner{background:linear-gradient(135deg,var(--good),#4caf50);color:#fff;padding:24px 28px;border-radius:12px;margin-top:32px;display:none;align-items:center;gap:20px}
+.complete-banner.show{display:flex}
+.complete-banner .check{width:56px;height:56px;background:#fff;color:var(--good);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;flex-shrink:0}
+.complete-banner h4{margin:0 0 4px;font-size:20px}
+.complete-banner p{margin:0;opacity:.95;font-size:18px}
+
+/* ============ LAB NAV ============ */
+.lab-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:16px}
+.lab-nav button{background:var(--red-500);color:#fff;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-size:18px;font-weight:600;font-family:inherit;transition:background .2s}
+.lab-nav button:hover{background:var(--red-700)}
+.lab-nav button.secondary{background:transparent;color:var(--muted);border:1px solid var(--border-strong)}
+.lab-nav button.secondary:hover{background:var(--red-50);color:var(--red-700);border-color:var(--red-300)}
+.lab-nav button:disabled{opacity:.4;cursor:not-allowed}
+
+/* ============ HELPERS ============ */
+.callout{border-left:4px solid var(--red-500);background:var(--red-50);padding:12px 16px;margin:12px 0;border-radius:8px;color:var(--text);font-size:18px}
+.callout.warn{border-color:var(--warn);background:#fffbeb}
+.callout.good{border-color:var(--good);background:#f0fdf4}
+.callout b{color:var(--red-900)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:18px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--red-700);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+
+/* ============ PERSONA CARD ============ */
+.persona{display:grid;grid-template-columns:120px 1fr;gap:20px;background:linear-gradient(135deg,var(--charcoal),var(--red-900));color:#fff;padding:24px;border-radius:14px;margin:20px 0;align-items:center}
+.persona .avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--red-500),var(--red-400));display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:#fff;border:3px solid rgba(255,255,255,.2)}
+.persona h4{margin:0 0 4px;font-size:20px;color:#fff}
+.persona .role{color:#fca5a5;font-size:17px;font-weight:600;margin-bottom:10px}
+.persona p{margin:0;font-size:18px;color:#e2e8f0;line-height:1.6}
+@media(max-width:600px){.persona{grid-template-columns:1fr;text-align:center}.persona .avatar{margin:0 auto}}
+
+/* ============ FOOTER ============ */
+footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
+
+/* ============ PASSWORD GATE ============ */
+#lock{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(200,16,46,.4),transparent 60%),#0b0b0f;z-index:9999;display:flex;align-items:center;justify-content:center}
+.lock-box{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:40px 44px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lock-box .cga-logo{width:64px;height:64px;border-radius:14px;background:var(--red-500);display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;margin:0 auto 18px;border:2px solid #fff}
+.lock-box h2{margin:0 0 6px;font-size:22px;color:var(--red-900)}
+.lock-box p{color:var(--muted);font-size:18px;margin:0 0 22px}
+.lock-box input[type=password],.lock-box input[type=text]{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:17px;padding:12px 44px 12px 16px;outline:none;font-family:inherit}
+.lock-box input:focus{border-color:var(--red-500)}
+.lock-box button.enter{width:100%;background:var(--red-500);color:#fff;border:none;border-radius:10px;font-size:17px;font-weight:700;padding:13px;cursor:pointer;font-family:inherit}
+.lock-box button.enter:hover{background:var(--red-700)}
+.lock-box .err{color:var(--red-500);font-size:17px;margin-top:8px;min-height:18px}
+.lock-box .conf{font-size:12px;color:var(--muted);margin-top:14px}
+.pw-wrap{position:relative;margin-bottom:12px}
+.toggle-pw{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;padding:0;cursor:pointer;opacity:.7;color:var(--muted)}
+.toggle-pw:hover{opacity:1}
+.toggle-pw svg{width:18px;height:18px;fill:currentColor;display:block}
+
+/* ============ PRINT ============ */
+@media print{
+  .progress-bar,nav.tabs,.lab-nav,.step-check,.copy-btn,.mode-bar,#lock{display:none!important}
+  .view{display:block!important;page-break-after:always}
+  body{background:#fff}
+  header.hero{padding:20px}
+}
+
+@media(max-width:760px){
+  main{padding:18px}
+  header.hero{padding:24px 18px 40px}
+  .hero-title h3{font-size:24px}
+  .uc-header{padding:20px;flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div id="lock">
+  <div class="lock-box">
+    <div class="cga-logo">CGA</div>
+    <h2>Contoso General Assurance Indonesia</h2>
+    <p>M365 Copilot Immersion Experience.<br>Enter the session password to continue.</p>
+    <div class="pw-wrap">
+      <input type="password" id="pw" placeholder="Session password" autocomplete="off"/>
+      <button type="button" class="toggle-pw" title="Show password" onclick="togglePw()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"/></svg></button>
+    </div>
+    <button class="enter" onclick="unlock()">Enter Session</button>
+    <div class="err" id="err"></div>
+    <div class="conf">Confidential, Contoso General Assurance Indonesia, internal use only.</div>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="app" style="display:none">
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand">
+      <div class="hero-logo">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CGA logo">
+          <rect x="8" y="8" width="104" height="104" rx="20" fill="#C8102E"/>
+          <text x="60" y="72" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-size="34" font-weight="800" letter-spacing="1" fill="#ffffff">CGA</text>
+        </svg>
+      </div>
+      <div class="brand-rule"></div>
+      <div>
+        <h1>Contoso General Assurance</h1>
+        <h2>M365 Copilot Immersion</h2>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div>Workshop Edition, 2026</div>
+      <div style="margin-top:6px"><span class="pill">5 Tabs</span></div>
+    </div>
+  </div>
+  <div class="hero-title">
+    <h3>Contoso General Assurance Indonesia, M365 Copilot Immersion</h3>
+    <p>A guided walkthrough of Microsoft 365 Copilot for a two hour immersion. Copilot Chat for everyone, Premium for the paid licence. Bilingual English and Bahasa Indonesia.</p>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <div class="progress-text">Progress: <strong id="p-done">0</strong> of <strong id="p-total">0</strong> steps completed in this tab</div>
+    <div class="progress-track"><div class="progress-fill" id="p-fill"></div></div>
+    <button class="reset-progress" onclick="resetProgress()">Reset progress</button>
+  </div>
+</div>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-view="intro"><span class="tab-num">0</span> Get Started</button>
+  <button class="tab" data-view="files"><span class="tab-num">1</span> Sample Files</button>
+  <button class="tab" data-view="copilotchat"><span class="tab-num">2</span> Copilot Chat</button>
+  <button class="tab" data-view="premium"><span class="tab-num">3</span> Premium</button>
+  <button class="tab" data-view="tips"><span class="tab-num">4</span> Tips</button>
+</nav>
+
+<main>
+
+<!-- ============ TAB 0 · GET STARTED ============ -->
+<div class="view active" id="view-intro">
+  <div class="uc-header">
+    <div class="uc-badge">0</div>
+    <div style="flex:1">
+      <h2>Welcome to the CGA M365 Copilot Immersion</h2>
+      <p class="uc-sub">Two tabs, eighteen activities, bilingual prompts, ready in two hours.</p>
+      <div class="uc-tags">
+        <span class="uc-tag duration">2 hours</span>
+        <span class="uc-tag level">All levels</span>
+        <span class="uc-tag">Bilingual EN and ID</span>
+        <span class="uc-tag">Copilot Chat, Word, Excel, PowerPoint, Outlook, Planner</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:17px">This two hour session takes the transformation office at Contoso General Assurance Indonesia through practical Copilot patterns for the PMO Lead and the Head of Operations. The Copilot Chat tab covers everyday work everyone can do, plus project intake, steering pre-reads, RAID logs, as-is process capture and to-be design across the Motor and Property Claims Platform Modernisation, the Marine Cargo Digital Onboarding, the Bancassurance Distribution Integration, the Sharia Product Launch and the Auto Manufacturer Partnership API rollout. The Premium tab shows what the paid Microsoft 365 Copilot licence unlocks: Researcher, Analyst, Copilot in Word, Excel, PowerPoint, Planner and Outlook, and Copilot Cowork for multi artefact assembly.</p>
+
+  <div class="persona">
+    <div class="avatar">BS</div>
+    <div>
+      <h4>Budi Santoso</h4>
+      <div class="role">Chief Transformation Officer, Contoso General Assurance Indonesia</div>
+      <p>Budi is CTO at CGA Indonesia, a general and non-life insurer. His remit spans three divisions: Personal (motor, property, health, personal accident, travel), Corporate (property and fire, liability, marine cargo, engineering, fleet and commercial vehicle, employee benefits) and Specialty (sharia and earthquake). His distribution mix reaches customers through brokers, agents, bancassurance partners, leasing partners and auto manufacturer channels. He sponsors five active programmes: the Motor and Property Claims Platform Modernisation, the Marine Cargo Digital Onboarding, the Bancassurance Distribution Integration, the Sharia Product Launch, and the Auto Manufacturer Partnership API rollout. Every activity in this immersion is written from Budi's point of view or from a member of his team.</p>
+    </div>
+  </div>
+
+  <div class="intro-grid">
+    <div class="info-card">
+      <h4><span class="icon">✓</span> Before you begin</h4>
+      <ul>
+        <li>Your <strong>CGA Microsoft 365 account</strong> (the email and password you use for Outlook)</li>
+        <li>A modern browser, <strong>Microsoft Edge</strong> or Chrome works best</li>
+        <li>Access to <strong>Microsoft 365 Copilot</strong> if you plan to try Premium prompts</li>
+        <li>Download the sample files from the Sample Files tab</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4><span class="icon">📋</span> What you will learn</h4>
+      <ul>
+        <li><strong>Copilot Chat</strong>: 2 General plus 2 Project plus 2 Operations activities</li>
+        <li><strong>Premium</strong>: 12 prompts grouped by product (Researcher, Analyst, Word, Excel, PowerPoint, Planner, Outlook, Cowork)</li>
+        <li>Each Premium card is tagged <strong>Project</strong> or <strong>Operations</strong></li>
+        <li><strong>Bahasa Indonesia and English</strong> for every activity</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4><span class="icon">💡</span> How to use this guide</h4>
+      <ul>
+        <li>Click each <strong>tab at the top</strong> to move between parts</li>
+        <li>Tick the <strong>checkbox on each step</strong> as you complete it</li>
+        <li>Your progress is <strong>saved automatically</strong> in this browser</li>
+        <li>Click <strong>Copy</strong> on any prompt to paste it straight into Copilot</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4><span class="icon">🧭</span> Workshop context</h4>
+      <ul>
+        <li>All sample files are <strong>synthetic</strong>, safe to use in demos</li>
+        <li>Persona for today: <strong>Budi Santoso, CTO</strong> at CGA Indonesia</li>
+        <li>Every prompt is provided in <strong>Bahasa Indonesia and English</strong></li>
+        <li>Use the <strong>Plain or GCSE toggle</strong> inside Copilot Chat and Premium</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-sep">GCSE, write better prompts</div>
+  <p style="font-size:18px">Great prompts share four ingredients. Use the <strong>GCSE</strong> mnemonic to make sure every prompt has all four. Inside the Copilot Chat and Premium tabs, toggle <strong>GCSE colour coded</strong> at the top of the tab to see every prompt broken into these four colours.</p>
+  <table>
+    <thead><tr><th style="width:90px">Letter</th><th>Stands for</th><th>What it does</th><th>Example fragment</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge" style="background:rgba(220,38,38,.14);color:var(--g-goal);border:1px solid var(--g-goal)">G</span> Goal</td><td>What you want Copilot to do</td><td>The verb, the outcome, the deliverable.</td><td><em>"Produce a one page steering committee pre-read..."</em></td></tr>
+      <tr><td><span class="badge" style="background:rgba(37,99,235,.14);color:var(--g-ctx);border:1px solid var(--g-ctx)">C</span> Context</td><td>Who you are, what situation</td><td>Role, audience, purpose, constraints.</td><td><em>"I am the CTO at CGA Indonesia, chairing the Motor and Property Claims Platform Modernisation steering committee..."</em></td></tr>
+      <tr><td><span class="badge" style="background:rgba(147,51,234,.14);color:var(--g-src);border:1px solid var(--g-src)">S</span> Source</td><td>Where to ground the answer</td><td>Files, sheets, URLs, jurisdictions, or "use your training" if none.</td><td><em>"Use the attached 01_CGA_ProjectStatusReport.docx"</em></td></tr>
+      <tr><td><span class="badge" style="background:rgba(22,163,74,.14);color:var(--g-exp);border:1px solid var(--g-exp)">E</span> Expectation</td><td>How the output should look</td><td>Length, format, tone, sections, language.</td><td><em>"Bahasa Indonesia, 200 words, three bullets per section, professional and calm"</em></td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip" style="margin-top:24px">
+    <span class="icon">💡</span>
+    <div>
+      <strong>Data safety reminder</strong>
+      Do not paste real policy data, claims records, identifiable customer information, or commercially sensitive partner data into Copilot during this session. Use only the sample files provided. With M365 Copilot your prompts and grounding data stay within your Microsoft 365 tenant and are not used to train AI models.
+    </div>
+  </div>
+
+  <div class="lab-nav">
+    <button class="secondary" disabled>← Previous</button>
+    <button data-go="files">Next: Sample Files →</button>
+  </div>
+</div>
+
+<!-- ============ TAB 2 · COPILOT CHAT ============ -->
+<div class="view" id="view-copilotchat">
+  <div class="uc-header">
+    <div class="uc-badge">2</div>
+    <div style="flex:1">
+      <h2>Copilot Chat activities</h2>
+      <p class="uc-sub">Six hands-on activities everyone at CGA can use with Microsoft 365 Copilot Chat. Two general prompts for daily insurance work, plus two Project and two Operations scenarios.</p>
+      <div class="uc-tags">
+        <span class="uc-tag duration">50 min</span>
+        <span class="uc-tag level">Beginner</span>
+        <span class="uc-tag">Copilot Chat</span>
+        <span class="uc-tag">Bahasa Indonesia + English</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="label">YOUR SCENARIO</div>
+    <div class="body">
+      Contoso General Assurance Indonesia is running a two hour immersion. This tab covers everything that runs on <strong>Copilot Chat</strong>, the entry point everyone at CGA gets. Two <strong>General</strong> prompts on regulatory reading and bilingual customer reply, then two <strong>Project</strong> prompts for the PMO Lead across the five transformation programmes, and two <strong>Operations</strong> prompts for the Head of Operations across Motor, Property Fire and Marine Cargo claims.
+    </div>
+  </div>
+
+  <div class="mode-bar">
+    <span class="lbl">Prompt mode</span>
+    <div class="gcse-toggle" role="tablist">
+      <button id="btn-plain-c" class="on" onclick="setMode(false)">Plain</button>
+      <button id="btn-gcse-c" onclick="setMode(true)">GCSE colour coded</button>
+    </div>
+    <div class="legend">
+      <span class="l-g">Goal</span><span class="l-c">Context</span><span class="l-s">Source</span><span class="l-e">Expectation</span>
+    </div>
+  </div>
+
+  <div class="section-sep">General, for everyone at CGA</div>
+  <div class="steps">
+    <div class="step" data-step="g1" data-tab="copilotchat">
+      <div class="step-num"><span>1</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">General 1 · Copilot Chat</span><span class="premium-pill" style="background:#e5f0ff;color:#1e40af;border-color:#93c5fd">GENERAL</span>
+        <h4>Summarise an OJK circular or policy wording into changes and actions</h4>
+        <p><strong>Task.</strong> Open Microsoft 365 Copilot Chat in the browser or the Teams app. Attach any long PDF (an OJK circular, a reinsurance treaty, or a policy wording). Ask Copilot to summarise what changed and what CGA needs to do. Everyone in insurance ops, compliance, underwriting and claims can reuse this pattern daily.</p>
+
+        <div class="prompt-lang bi"><span class="flag">🇮🇩</span> Bahasa Indonesia</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Ringkas dokumen terlampir untuk saya sebagai staf Contoso General Assurance Indonesia. Sajikan: (1) tujuan dokumen dalam 2 kalimat, (2) 5 perubahan utama dibanding versi sebelumnya atau praktik saat ini, (3) 5 aksi konkret yang harus dilakukan tim CGA dalam 30 hari ke depan, dengan pemilik peran yang disarankan, (4) 3 risiko kepatuhan jika perubahan tidak diikuti. Bahasa Indonesia formal, maksimal 350 kata, gunakan bullet dan sub-heading. Jangan mengarang isi yang tidak ada dalam dokumen.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Ringkas dokumen terlampir menjadi ringkasan perubahan dan daftar aksi 30 hari</span> <span class="c"><span class="lbl">C</span>Saya staf Contoso General Assurance Indonesia (compliance, underwriting, klaim atau operasi)</span>. <span class="s"><span class="lbl">S</span>Gunakan hanya dokumen yang saya lampirkan (OJK circular, treaty reasuransi, atau policy wording). Jangan mengarang isi</span>. <span class="e"><span class="lbl">E</span>Sajikan (1) tujuan dokumen 2 kalimat, (2) 5 perubahan utama, (3) 5 aksi 30 hari dengan pemilik peran, (4) 3 risiko kepatuhan. Bahasa Indonesia formal, maksimal 350 kata, bullet dan sub-heading.</span></div>
+
+        <div class="prompt-lang en"><span class="flag">🇬🇧</span> English</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Summarise the attached document for me as a Contoso General Assurance Indonesia staff member. Provide: (1) purpose of the document in 2 sentences, (2) 5 key changes vs the previous version or current practice, (3) 5 concrete actions the CGA team must take in the next 30 days with suggested role owner, (4) 3 compliance risks if the changes are not followed. Professional English, maximum 350 words, bullets and sub-headings. Do not fabricate content not present in the document.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Summarise the attached document into a change summary and 30 day action list</span> <span class="c"><span class="lbl">C</span>I am a Contoso General Assurance Indonesia staff member (compliance, underwriting, claims or operations)</span>. <span class="s"><span class="lbl">S</span>Use only the document I attach (OJK circular, reinsurance treaty, or policy wording). Do not fabricate content</span>. <span class="e"><span class="lbl">E</span>Provide (1) purpose in 2 sentences, (2) 5 key changes, (3) 5 30 day actions with role owner, (4) 3 compliance risks. Professional English, maximum 350 words, bullets and sub-headings.</span></div>
+
+        <div class="callout"><b>Facilitator note.</b> This is the everyday Copilot Chat pattern: attach a long doc, ask for changes and actions. Works for any insurance regulation, circular, treaty or SOP.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="g2" data-tab="copilotchat">
+      <div class="step-num"><span>2</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">General 2 · Copilot Chat</span><span class="premium-pill" style="background:#e5f0ff;color:#1e40af;border-color:#93c5fd">GENERAL</span>
+        <h4>Draft a bilingual reply to a broker or customer</h4>
+        <p><strong>Task.</strong> Open Copilot Chat. Paste an incoming email or the situation summary. Ask Copilot to draft a bilingual reply, Bahasa Indonesia and English, matching the CGA voice. Every function that talks to brokers, customers or reinsurers can use this pattern.</p>
+
+        <div class="prompt-lang bi"><span class="flag">🇮🇩</span> Bahasa Indonesia</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Susun draft balasan email untuk broker atau nasabah Contoso General Assurance Indonesia dalam dua bahasa: Bahasa Indonesia formal di bagian atas, dan English profesional di bawah. Konteks: saya staf CGA, ingin menjawab pertanyaan berdasarkan konten email yang saya tempelkan. Gunakan nada suara CGA (profesional, tegas, empatik). Jangan menjanjikan angka premi, batas pertanggungan, atau keputusan klaim yang belum saya sebutkan. Sertakan salam pembuka yang sesuai, ringkasan pertanyaan mereka, jawaban langkah demi langkah, langkah tindak lanjut, dan salam penutup yang sopan. Maksimal 250 kata per bahasa.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Susun draft balasan email untuk broker atau nasabah dalam dua bahasa: Bahasa Indonesia di atas, English di bawah</span> <span class="c"><span class="lbl">C</span>Saya staf Contoso General Assurance Indonesia, nada suara CGA profesional, tegas, empatik</span>. <span class="s"><span class="lbl">S</span>Gunakan hanya konten email atau situasi yang saya tempelkan. Jangan menjanjikan angka premi, batas pertanggungan, atau keputusan klaim yang belum saya sebutkan</span>. <span class="e"><span class="lbl">E</span>Sertakan salam pembuka, ringkasan pertanyaan mereka, jawaban langkah demi langkah, langkah tindak lanjut, dan salam penutup. Maksimal 250 kata per bahasa.</span></div>
+
+        <div class="prompt-lang en"><span class="flag">🇬🇧</span> English</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Draft a bilingual reply to a broker or customer of Contoso General Assurance Indonesia. Put professional Bahasa Indonesia at the top and professional English at the bottom. Context: I am CGA staff, replying based on the email content I pasted. Use the CGA voice (professional, direct, empathetic). Do not promise a premium figure, sum insured limit, or claims decision I did not mention. Include a suitable greeting, a summary of their question, a step by step answer, next steps, and a courteous closing. Maximum 250 words per language.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Draft a bilingual broker or customer reply, Bahasa Indonesia on top and English at the bottom</span> <span class="c"><span class="lbl">C</span>I am CGA staff, using the CGA voice: professional, direct, empathetic</span>. <span class="s"><span class="lbl">S</span>Use only the email content or situation I paste. Do not promise a premium figure, sum insured limit, or claims decision I did not mention</span>. <span class="e"><span class="lbl">E</span>Include greeting, summary of their question, step by step answer, next steps, courteous closing. Maximum 250 words per language.</span></div>
+
+        <div class="callout"><b>Facilitator note.</b> Ask participants to try switching the tone: "make it firmer", "make it warmer for a long standing broker". Copilot Chat handles tone changes in one turn.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep">Project management, for the PMO Lead</div>
+  <div class="steps">
+    <div class="step" data-step="a1" data-tab="copilotchat">
+      <div class="step-num"><span>3</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">A1 · Project · Copilot Chat</span>
+        <h4>Project status intake and auto-summary</h4>
+        <p><strong>Task.</strong> Open Microsoft 365 Copilot Chat in the browser or the Teams app. Attach <strong>01_CGA_ProjectStatusReport.docx</strong>. Ask Copilot to produce a steering committee pre-read: RAG status, top risks, budget burn, decisions requested. Copy the output into a Teams post to the sponsor group.</p>
+
+        <div class="prompt-lang bi"><span class="flag">🇮🇩</span> Bahasa Indonesia</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Ringkas laporan status portofolio transformasi Contoso General Assurance Indonesia yang mencakup program Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch dan Auto Manufacturer Partnership API. Ubah menjadi pre-read steering committee 1 halaman untuk saya sebagai Chief Transformation Officer. Sajikan status RAG per program, 5 risiko utama lintas portofolio, posisi budget burn, dan daftar keputusan yang diminta. Gunakan bahasa Indonesia formal, tone tenang dan faktual, maksimal 300 kata, gunakan bullet dan sub-heading.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Ringkas laporan status portofolio transformasi CGA (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API) menjadi pre-read steering committee 1 halaman</span> <span class="c"><span class="lbl">C</span>untuk saya sebagai Chief Transformation Officer Contoso General Assurance Indonesia</span>. <span class="s"><span class="lbl">S</span>Gunakan file 01_CGA_ProjectStatusReport.docx</span>. <span class="e"><span class="lbl">E</span>Sajikan status RAG per workstream, 5 risiko utama, posisi budget burn, dan daftar keputusan yang diminta. Bahasa Indonesia formal, tone tenang dan faktual, maksimal 300 kata, gunakan bullet dan sub-heading.</span></div>
+
+        <div class="prompt-lang en"><span class="flag">🇬🇧</span> English</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Summarise the transformation portfolio status report in 01_CGA_ProjectStatusReport.docx (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API) into a one page steering committee pre-read for me, the Chief Transformation Officer of Contoso General Assurance Indonesia. Show RAG status per programme, top 5 cross-portfolio risks, budget burn position, and the list of decisions requested. Use professional English, calm and factual tone, maximum 300 words, use bullets and sub-headings.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Summarise the CGA transformation portfolio status report (Motor and Property Claims Platform, Marine Cargo Digital Onboarding, Bancassurance Integration, Sharia Launch, Auto Manufacturer API) into a one page steering committee pre-read</span> <span class="c"><span class="lbl">C</span>for me, the Chief Transformation Officer of Contoso General Assurance Indonesia</span>. <span class="s"><span class="lbl">S</span>Use the file 01_CGA_ProjectStatusReport.docx</span>. <span class="e"><span class="lbl">E</span>Show RAG status per workstream, top 5 risks, budget burn position, and the list of decisions requested. Professional English, calm and factual tone, maximum 300 words, bullets and sub-headings.</span></div>
+
+        <div class="callout"><b>Facilitator note.</b> Point out that Copilot Chat with a file grounds every claim in the source. Encourage participants to click the citation numbers to see the sentence in the docx.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="a2" data-tab="copilotchat">
+      <div class="step-num"><span>4</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">A2 · Project · Copilot Chat</span>
+        <h4>RAID log and risk register consolidation</h4>
+        <p><strong>Task.</strong> Open <strong>03_CGA_RAID_Log.xlsx</strong> in Excel for the web. Activate Copilot in Excel. Ask Copilot to summarise the log by category and severity, highlight the top 5 items for the CTO, and propose a PivotTable view.</p>
+
+        <div class="prompt-lang bi"><span class="flag">🇮🇩</span> Bahasa Indonesia</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Saya PMO Lead di Contoso General Assurance Indonesia. Analisis file RAID log yang terbuka. Berikan (1) jumlah item per kategori Risk, Assumption, Issue, Dependency, (2) 5 item paling kritikal berdasarkan severity dan status, (3) rekomendasi PivotTable dengan owner sebagai baris dan severity sebagai kolom, (4) daftar 3 item overdue yang harus dieskalasi ke CTO minggu ini. Output dalam bahasa Indonesia, format tabel Markdown, tanpa opini pribadi.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Analisis file RAID log yang terbuka dan berikan ringkasan konsolidasi</span> <span class="c"><span class="lbl">C</span>Saya PMO Lead di Contoso General Assurance Indonesia</span>. <span class="s"><span class="lbl">S</span>Gunakan sheet aktif di file 03_CGA_RAID_Log.xlsx</span>. <span class="e"><span class="lbl">E</span>Berikan (1) jumlah item per kategori Risk, Assumption, Issue, Dependency, (2) 5 item paling kritikal berdasarkan severity dan status, (3) rekomendasi PivotTable owner x severity, (4) 3 item overdue yang harus dieskalasi ke CTO minggu ini. Bahasa Indonesia, format tabel Markdown, tanpa opini pribadi.</span></div>
+
+        <div class="prompt-lang en"><span class="flag">🇬🇧</span> English</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>I am the PMO Lead at Contoso General Assurance Indonesia. Analyse the open RAID log. Provide (1) count of items per category Risk, Assumption, Issue, Dependency, (2) the 5 most critical items ranked by severity and status, (3) a proposed PivotTable with owner as rows and severity as columns, (4) a list of 3 overdue items to escalate to the CTO this week. Output in English, Markdown tables, no personal opinions.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Analyse the open RAID log and produce a consolidation summary</span> <span class="c"><span class="lbl">C</span>I am the PMO Lead at Contoso General Assurance Indonesia</span>. <span class="s"><span class="lbl">S</span>Use the active sheet in 03_CGA_RAID_Log.xlsx</span>. <span class="e"><span class="lbl">E</span>Provide (1) count per category, (2) top 5 by severity and status, (3) a PivotTable owner x severity, (4) 3 overdue items to escalate to the CTO this week. English, Markdown tables, no opinions.</span></div>
+
+        <div class="callout"><b>Facilitator note.</b> Ask Copilot to "insert a PivotTable" after the summary. Show that the insert action produces a real object in the sheet.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep">Operations and BPR, for the Head of Operations</div>
+  <div class="steps">
+    <div class="step" data-step="b1" data-tab="copilotchat">
+      <div class="step-num"><span>5</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">B1 · Operations · Copilot Chat</span>
+        <h4>As-is process capture from a claims workshop transcript</h4>
+        <p><strong>Task.</strong> Open <strong>04_CGA_ClaimsProcessTranscript.docx</strong> in Word for the web. Open the Copilot pane. Ask Copilot to summarise the transcript and extract both the as-is motor claims process and the as-is commercial property fire claims process end-to-end with owners, hand-offs and pain points. Insert the result into the document as a new section.</p>
+
+        <div class="prompt-lang bi"><span class="flag">🇮🇩</span> Bahasa Indonesia</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Baca transkrip workshop klaim yang terbuka. Ekstrak proses as-is untuk klaim motor Contoso General Assurance Indonesia dari First Notice of Loss sampai pembayaran, dan ekstrak juga proses as-is untuk klaim property fire komersial dari FNOL sampai settlement. Untuk setiap langkah, sebutkan: nama aktivitas, pemilik peran, sistem yang digunakan, waktu rata-rata, hand-off ke pihak lain, pain point yang disebutkan. Sajikan sebagai tabel Markdown, ditambah ringkasan naratif 150 kata di atas tabel. Bahasa Indonesia formal.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Ekstrak proses as-is untuk klaim motor dan klaim property fire komersial CGA Indonesia dari First Notice of Loss sampai pembayaran</span> <span class="c"><span class="lbl">C</span>Saya business analyst di tim BPR Contoso General Assurance Indonesia</span>. <span class="s"><span class="lbl">S</span>Gunakan transkrip workshop di file 04_CGA_ClaimsProcessTranscript.docx yang sedang terbuka</span>. <span class="e"><span class="lbl">E</span>Tabel Markdown per langkah: aktivitas, pemilik peran, sistem, waktu rata-rata, hand-off, pain point. Tambahkan ringkasan naratif 150 kata di atas tabel. Bahasa Indonesia formal.</span></div>
+
+        <div class="prompt-lang en"><span class="flag">🇬🇧</span> English</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Read the open claims workshop transcript. Extract the as-is motor claims process for Contoso General Assurance Indonesia from First Notice of Loss to payment, and also extract the as-is commercial property fire claims process from FNOL to settlement. For each step, list: activity name, role owner, system used, average time, hand-off to another party, pain point mentioned. Present as a Markdown table, plus a 150 word narrative summary above the table. Professional English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Extract the as-is motor claims process and the as-is commercial property fire claims process at CGA Indonesia from First Notice of Loss to payment</span> <span class="c"><span class="lbl">C</span>I am a business analyst on the BPR team at Contoso General Assurance Indonesia</span>. <span class="s"><span class="lbl">S</span>Use the workshop transcript in the open file 04_CGA_ClaimsProcessTranscript.docx</span>. <span class="e"><span class="lbl">E</span>Markdown table per step: activity, role owner, system, average time, hand-off, pain point. Add a 150 word narrative summary above the table. Professional English.</span></div>
+
+        <div class="callout"><b>Facilitator note.</b> Show the Insert button on the Copilot answer. The output lands as editable content in the Word doc, ready for the process owner to annotate.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="b2" data-tab="copilotchat">
+      <div class="step-num"><span>6</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">B2 · Operations · Copilot Chat</span>
+        <h4>To-be process design and bottleneck analysis</h4>
+        <p><strong>Task.</strong> Open Copilot Chat. Attach <strong>05_CGA_ClaimsOperationsSurvey.xlsx</strong>. Ask Copilot to identify bottlenecks quantitatively across Motor, Property and Marine Cargo, propose a to-be process per LOB, and list the top 3 automations per LOB to reduce claims TAT. Save the answer as the baseline for the B3 SOP rewrite.</p>
+
+        <div class="prompt-lang bi"><span class="flag">🇮🇩</span> Bahasa Indonesia</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Analisis file 05_CGA_ClaimsOperationsSurvey.xlsx yang berisi feedback 40 adjuster Contoso General Assurance Indonesia lintas tiga lini bisnis (Motor, Property, Marine Cargo) di Jakarta, Surabaya, Medan, Bandung dan Semarang. Berikan: (1) 3 bottleneck teratas per LOB berdasarkan kategori dan dampaknya ke TAT rata-rata, (2) desain proses to-be untuk setiap LOB dalam bentuk tabel langkah, (3) 3 usulan otomatisasi prioritas per LOB dengan estimasi penghematan waktu dan effort implementasi (Low/Med/High), (4) 5 KPI untuk memantau to-be process yang berlaku lintas LOB. Bahasa Indonesia formal, format bullet dan tabel.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Identifikasi bottleneck dan desain proses to-be klaim CGA Indonesia lintas Motor, Property dan Marine Cargo</span> <span class="c"><span class="lbl">C</span>Saya Head of Operations Contoso General Assurance Indonesia, target menurunkan TAT klaim 30 persen untuk motor, 25 persen untuk property fire, dan 20 persen untuk marine cargo dalam 6 bulan</span>. <span class="s"><span class="lbl">S</span>Gunakan file 05_CGA_ClaimsOperationsSurvey.xlsx berisi feedback 40 adjuster lintas Motor, Property dan Marine Cargo</span>. <span class="e"><span class="lbl">E</span>Berikan (1) 3 bottleneck teratas per LOB, (2) proses to-be per LOB dalam tabel langkah, (3) 3 otomatisasi prioritas per LOB dengan estimasi penghematan waktu dan effort, (4) 5 KPI to-be lintas LOB. Bahasa Indonesia formal, bullet dan tabel.</span></div>
+
+        <div class="prompt-lang en"><span class="flag">🇬🇧</span> English</div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Analyse the file 05_CGA_ClaimsOperationsSurvey.xlsx containing feedback from 40 adjusters at Contoso General Assurance Indonesia across three lines of business (Motor, Property, Marine Cargo) and five regional offices (Jakarta, Surabaya, Medan, Bandung, Semarang). Provide: (1) top 3 bottlenecks per LOB by category with impact on average TAT, (2) a to-be claims process per LOB as a step table, (3) 3 priority automation ideas per LOB with estimated time savings and implementation effort (Low/Med/High), (4) 5 KPIs to monitor the to-be process across all three LOBs. Professional English, bullets and tables.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Identify bottlenecks and design a to-be claims process at CGA Indonesia across Motor, Property and Marine Cargo</span> <span class="c"><span class="lbl">C</span>I am the Head of Operations at Contoso General Assurance Indonesia, targeting a 30 percent motor claims TAT reduction, 25 percent property fire TAT reduction, and 20 percent marine cargo TAT reduction within 6 months</span>. <span class="s"><span class="lbl">S</span>Use 05_CGA_ClaimsOperationsSurvey.xlsx with feedback from 40 adjusters across Motor, Property and Marine Cargo</span>. <span class="e"><span class="lbl">E</span>Provide (1) top 3 bottlenecks per LOB, (2) to-be process per LOB as a step table, (3) 3 priority automations per LOB with estimated time savings and effort, (4) 5 to-be KPIs across LOBs. Professional English, bullets and tables.</span></div>
+
+        <div class="callout"><b>Facilitator note.</b> Ask Copilot to also produce a swimlane style step table for the Motor LOB, one column per role. It gives the ops team a shareable process view they can paste into a Word doc or Loop page.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="complete-banner" id="copilotchat-complete">
+    <div class="check">✓</div>
+    <div>
+      <h4>Copilot Chat complete.</h4>
+      <p>You have run six Copilot Chat activities across General, Project and Operations. Move on to Premium to see what the paid licence adds.</p>
+    </div>
+  </div>
+
+  <div class="lab-nav">
+    <button class="secondary" data-go="files">← Back to Sample Files</button>
+    <button data-go="premium">Next: Premium →</button>
+  </div>
+</div>
+
+<!-- ============ TAB 3 · PREMIUM ============ -->
+<div class="view" id="view-premium">
+  <div class="uc-header">
+    <div class="uc-badge">3</div>
+    <div style="flex:1">
+      <h2>Premium, what the paid licence unlocks</h2>
+      <p class="uc-sub">Eleven Premium prompts grouped by product. Each card is tagged Project or Operations so you can see which scenario the product fits best at CGA.</p>
+      <div class="uc-tags">
+        <span class="uc-tag duration">55 min</span>
+        <span class="uc-tag level">Intermediate</span>
+        <span class="uc-tag">M365 Copilot licence</span>
+        <span class="uc-tag">Researcher · Analyst · Word · Excel · PowerPoint · Planner · Outlook · Cowork</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="label">YOUR SCENARIO</div>
+    <div class="body">
+      Everything on the Copilot Chat tab runs on the free entry point. The prompts below unlock the full <strong>Microsoft 365 Copilot licence</strong>: purpose built agents (<strong>Researcher</strong>, <strong>Analyst</strong>), in app Copilot in <strong>Word, Excel, PowerPoint, Planner and Outlook</strong>, and the multi artefact assembly workflow <strong>Cowork</strong>. Each card is tagged <b>Project</b> (PMO Lead) or <b>Operations</b> (Head of Operations) so audiences can see which product fits which scenario.
+    </div>
+  </div>
+
+  <div class="mode-bar">
+    <span class="lbl">Prompt mode</span>
+    <div class="gcse-toggle" role="tablist">
+      <button id="btn-plain-p" class="on" onclick="setMode(false)">Plain</button>
+      <button id="btn-gcse-p" onclick="setMode(true)">GCSE colour coded</button>
+    </div>
+    <div class="legend">
+      <span class="l-g">Goal</span><span class="l-c">Context</span><span class="l-s">Source</span><span class="l-e">Expectation</span>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Researcher agent</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pa1" data-tab="premium">
+      <div class="step-num"><span>1</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium A1 · Researcher agent</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#fff4e5;color:#8B0A22;border-color:#F4B82E">PROJECT</span>
+        <h4>Deep benchmark of PM practices at ASEAN insurers</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot Chat</span><span class="arrow">→</span><span class="step-pill">Switch agent</span><span class="arrow">→</span><span class="step-pill">Researcher</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Produce a deep research report benchmarking project management and PMO practices for core insurance platform transformations at 5 ASEAN general insurers I am the PMO Lead at Contoso General Assurance Indonesia, preparing a board paper to justify a new PMO operating model. Use publicly available sources only: annual reports, regulator disclosures (OJK, MAS, BNM, IC), LOMA, Celent, Gartner, McKinsey, Bain, Deloitte, Swiss Re Sigma, credible Indonesian and regional business press. Deliverable: 8 to 10 page report with (1) executive summary, (2) peer table (insurer, country, transformation programme name, PMO cadence, RAID tooling, delivery KPIs), (3) 5 emerging practices, (4) 3 anti-patterns to avoid, (5) 5 concrete recommendations for CGA with expected impact and risk. Cite every fact inline with a working URL. English, executive tone.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Produce a deep research report benchmarking project management and PMO practices for core insurance platform transformations at 5 ASEAN general insurers</span> <span class="c"><span class="lbl">C</span>I am the PMO Lead at Contoso General Assurance Indonesia, preparing a board paper to justify a new PMO operating model</span>. <span class="s"><span class="lbl">S</span>Use publicly available sources only: annual reports, regulator disclosures (OJK, MAS, BNM, IC), LOMA, Celent, Gartner, McKinsey, Bain, Deloitte, Swiss Re Sigma, credible Indonesian and regional business press</span>. <span class="e"><span class="lbl">E</span>Deliverable: 8 to 10 page report with (1) executive summary, (2) peer table (insurer, country, transformation programme name, PMO cadence, RAID tooling, delivery KPIs), (3) 5 emerging practices, (4) 3 anti-patterns to avoid, (5) 5 concrete recommendations for CGA with expected impact and risk. Cite every fact inline with a working URL. English, executive tone.</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Analyst agent</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pb1" data-tab="premium">
+      <div class="step-num"><span>2</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium B1 · Analyst agent</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#e6f7ee;color:#166534;border-color:#86efac">OPERATIONS</span>
+        <h4>Quantify multi-LOB claims TAT loss (Motor, Property, Marine Cargo) and propose to-be automation portfolio</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot Chat</span><span class="arrow">→</span><span class="step-pill">Switch agent</span><span class="arrow">→</span><span class="step-pill">Analyst</span><span class="arrow">→</span><span class="step-pill">Attach 05_CGA_ClaimsOperationsSurvey.xlsx</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Analyse the attached multi-LOB adjuster survey and produce a data-driven bottleneck diagnosis with a per-LOB automation portfolio I am the Head of Operations at Contoso General Assurance Indonesia. Board wants a business case for a claims transformation this quarter. Use only the 40 rows in 05_CGA_ClaimsOperationsSurvey.xlsx which cover three lines of business (Motor, Property, Marine Cargo) across Jakarta, Surabaya, Medan, Bandung and Semarang. Do not fabricate values; if data is missing, say so. Deliverables in order: (1) Python-quality data profile of the sheet, (2) top 5 bottlenecks ranked by TAT loss in days per claim and total FTE hours, quantified per LOB (Motor vs Property vs Marine Cargo), (3) correlation between adjuster satisfaction and bottleneck category by LOB, (4) a chart showing average TAT per bottleneck category, grouped by LOB, (5) proposed to-be automation portfolio of 6 initiatives (2 per LOB) with expected TAT reduction per LOB, complexity 1 to 5, and dependency on existing systems, (6) one paragraph summary suitable for the CEO covering all three LOBs. English, tables and one chart, no opinions without a data citation.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Analyse the attached multi-LOB adjuster survey and produce a per-LOB bottleneck diagnosis with a Motor plus Property plus Marine Cargo automation portfolio</span> <span class="c"><span class="lbl">C</span>I am the Head of Operations at Contoso General Assurance Indonesia. Board wants a business case for a claims transformation this quarter</span>. <span class="s"><span class="lbl">S</span>Use only the 40 rows in 05_CGA_ClaimsOperationsSurvey.xlsx spanning three LOBs (Motor, Property, Marine Cargo) and 5 regions. Do not fabricate values; if data is missing, say so</span>. <span class="e"><span class="lbl">E</span>Deliverables in order: (1) Python-quality data profile of the sheet with per-LOB breakdown, (2) top 5 bottlenecks per LOB ranked by TAT loss in days per claim and total FTE hours, (3) correlation between adjuster satisfaction and bottleneck category, split by LOB, (4) a chart showing average TAT per bottleneck category grouped by LOB, (5) proposed to-be automation portfolio of 6 initiatives (2 per LOB) with expected TAT reduction per LOB, complexity 1 to 5, and dependency on existing systems, (6) one paragraph summary suitable for the CEO covering all three LOBs. English, tables and one chart, no opinions without a data citation.</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Copilot in Word</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pa2" data-tab="premium">
+      <div class="step-num"><span>3</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium A2 · Copilot in Word</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#fff4e5;color:#8B0A22;border-color:#F4B82E">PROJECT</span>
+        <h4>Draft the stakeholder brief grounded on the status report</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in Word</span><span class="arrow">→</span><span class="step-pill">Draft with Copilot</span><span class="arrow">→</span><span class="step-pill">Reference 01_CGA_ProjectStatusReport.docx</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Draft a two page stakeholder brief for the CGA Indonesia transformation portfolio (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API), ready to send to the executive sponsor group I am the Project Manager at Contoso General Assurance Indonesia reporting to CTO Budi Santoso. Sponsors are the CEO, CFO, COO and the head of the Board risk committee. Ground every fact in the referenced file 01_CGA_ProjectStatusReport.docx. Do not invent milestones, budget numbers or dates. Structure: title, one sentence context, RAG status per workstream in a small table, 3 highlights, 3 lowlights, top 5 risks with mitigation owner, budget position, 3 decisions requested with recommended option. Professional English, calm and factual, maximum 500 words. Insert a section break before the decisions section.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Draft a two page stakeholder brief for the CGA Indonesia transformation portfolio (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API), ready to send to the executive sponsor group</span> <span class="c"><span class="lbl">C</span>I am the Project Manager at Contoso General Assurance Indonesia reporting to CTO Budi Santoso. Sponsors are the CEO, CFO, COO and the head of the Board risk committee</span>. <span class="s"><span class="lbl">S</span>Ground every fact in the referenced file 01_CGA_ProjectStatusReport.docx. Do not invent milestones, budget numbers or dates</span>. <span class="e"><span class="lbl">E</span>Structure: title, one sentence context, RAG status per workstream in a small table, 3 highlights, 3 lowlights, top 5 risks with mitigation owner, budget position, 3 decisions requested with recommended option. Professional English, calm and factual, maximum 500 words. Insert a section break before the decisions section.</span></div>
+      </div>
+    </div>
+
+    <div class="step" data-step="pb2" data-tab="premium">
+      <div class="step-num"><span>4</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium B2 · Copilot in Word</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#e6f7ee;color:#166534;border-color:#86efac">OPERATIONS</span>
+        <h4>Rewrite the underwriting SOP in place</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in Word</span><span class="arrow">→</span><span class="step-pill">Open 06_CGA_UnderwritingPolicyManual.docx</span><span class="arrow">→</span><span class="step-pill">Prompt in document</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Rewrite the commercial property underwriting SOP inline: modernise the language, add a decision tree for risk survey, and insert a prominent callout for earthquake exposure and other high hazard occupancies I am the Head of Underwriting at Contoso General Assurance Indonesia. Audience: 60 underwriters, mixed experience, across 3 regional offices. Use only the open document 06_CGA_UnderwritingPolicyManual.docx. Preserve regulatory references verbatim. Do not invent authority limits. Rewrite the document in place. Keep the numbering. Add a new section "Risk Survey Decision Tree" with 5 branches. Add a callout box "High Hazard Occupancies, treat with caution". Track changes on. English, formal CGA voice.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Rewrite the commercial property underwriting SOP inline: modernise the language, add a decision tree for risk survey, and insert a prominent callout for earthquake exposure and other high hazard occupancies</span> <span class="c"><span class="lbl">C</span>I am the Head of Underwriting at Contoso General Assurance Indonesia. Audience: 60 underwriters, mixed experience, across 3 regional offices</span>. <span class="s"><span class="lbl">S</span>Use only the open document 06_CGA_UnderwritingPolicyManual.docx. Preserve regulatory references verbatim. Do not invent authority limits</span>. <span class="e"><span class="lbl">E</span>Rewrite the document in place. Keep the numbering. Add a new section "Risk Survey Decision Tree" with 5 branches. Add a callout box "High Hazard Occupancies, treat with caution". Track changes on. English, formal CGA voice.</span></div>
+      </div>
+    </div>
+
+
+    <div class="step" data-step="pb6" data-tab="premium">
+      <div class="step-num"><span>5</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium B6 · Copilot in Word</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#e6f7ee;color:#166534;border-color:#86efac">OPERATIONS</span>
+        <h4>Business Requirements Document for the new Motor Claims application</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in Word</span><span class="arrow">→</span><span class="step-pill">Blank document</span><span class="arrow">→</span><span class="step-pill">Draft with Copilot</span><span class="arrow">→</span><span class="step-pill">Reference 01_CGA_ProjectStatusReport.docx and 04_CGA_ClaimsProcessTranscript.docx</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Draft a full Business Requirements Document (BRD) for the new Motor Claims web and mobile application that Contoso General Assurance Indonesia is building as part of the Motor and Property Claims Platform Modernisation. I am the Business Analyst supporting the Head of Claims at Contoso General Assurance Indonesia. Audience is the Head of Claims, the Head of Operations, the CTO and the vendor delivery team. Application description: a customer facing web and mobile application that lets a policyholder lodge a First Notice of Loss, upload photos and driving licence, receive a claim reference number, track status end to end, chat with an adjuster, upload additional documents, e-sign the settlement offer and receive the payment confirmation. It integrates with the core policy system, the fraud screening engine, the workshop network and the payment gateway. Ground every business rule and hand off in the referenced files 01_CGA_ProjectStatusReport.docx (scope and milestones) and 04_CGA_ClaimsProcessTranscript.docx (as-is motor claims process). Do not invent regulatory clauses, integration endpoints or non functional numbers. Produce the BRD with the following sections: (1) Document control and version history, (2) Executive summary, (3) Business context and OJK regulatory scope, (4) In scope and out of scope, (5) Stakeholders and RACI, (6) As-is motor claims process summary, (7) To-be motor claims process as a swimlane table with columns Policyholder, Adjuster, Fraud Screening, Workshop, Payment Gateway, one row per step from FNOL to payment; each row lists the step name in the column of the role that performs it, and shows hand offs as arrows between columns, (8) Functional requirements grouped by module (Policyholder web, Policyholder mobile, Adjuster desktop, Integrations, Notifications), each with an ID (FR-001 style), description, priority (Must, Should, Could, Won’t) and acceptance criteria in Given / When / Then, (9) Non functional requirements (performance, availability, security, accessibility, data residency in Indonesia, language: Bahasa Indonesia primary and English secondary), (10) Data model as an entity table with columns Entity, Description, Key Attributes, Related Entities, Relationship, covering Policy, Policyholder, Claim, Document, Payment, (11) Integration list with system, direction, pattern and payload summary, (12) Risks, assumptions, issues, dependencies referencing the RAID log, (13) Acceptance and sign off. After section 7, generate a landscape target state swimlane hand off diagram image using Designer inside Copilot and insert it below the swimlane table. Style: process stages as column headers (FNOL Submission, Evidence Capture and Upload, Claim Reference Created, Triage and Assignment, Assessment and Workshop, Settlement and E Signature, Payment and Closure); swimlanes as row headers (Policyholder Web and Mobile, Web and Mobile Application, Claims Adjuster Internal Users, Fraud Screening, Workshop Network, Finance and Payment, Key Output and Hand off); each step in a rounded box with a small icon; solid arrows for process flow, dashed arrows for system interactions; a small legend and a review prompts callout in the bottom right; CGA brand palette (signature red header band, deep red accents, gold highlights, corporate charcoal text, soft neutral swimlane backgrounds); Inter font; clean, professional business consulting look, no fake text or logos. After section 10, generate a landscape data model diagram image using Designer inside Copilot showing the five entities Policy, Policyholder, Claim, Document, Payment as rounded boxes with key attributes as bullets, and relationships as labelled arrows with cardinality (1, 0..1, 1..N, N..N); same CGA brand palette and Inter font as the swimlane; header band reading Motor Claims Data Model. English, professional BA voice, ready for stakeholder review.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Draft a full Business Requirements Document (BRD) for the new Motor Claims web and mobile application that CGA Indonesia is building as part of the Motor and Property Claims Platform Modernisation, with a numbered process step table and a data entity table</span> <span class="c"><span class="lbl">C</span>I am the Business Analyst supporting the Head of Claims at CGA Indonesia. Audience: Head of Claims, Head of Operations, CTO, vendor delivery team. Application: customer facing web and mobile app that lets a policyholder lodge a First Notice of Loss, upload photos and driving licence, receive a claim reference number, track status end to end, chat with an adjuster, upload documents, e-sign the settlement offer and receive payment confirmation. It integrates with the core policy system, fraud screening, workshop network and payment gateway</span>. <span class="s"><span class="lbl">S</span>Ground every business rule and hand off in 01_CGA_ProjectStatusReport.docx (scope, milestones) and 04_CGA_ClaimsProcessTranscript.docx (as-is motor claims). Do not invent regulatory clauses, integration endpoints or non functional numbers</span>. <span class="e"><span class="lbl">E</span>Produce the BRD with sections (1) Document control and version history, (2) Executive summary, (3) Business context and OJK regulatory scope, (4) In and out of scope, (5) Stakeholders and RACI, (6) As-is process summary, (7) To-be process as a swimlane table (columns: Policyholder, Adjuster, Fraud Screening, Workshop, Payment Gateway; one row per step; show hand offs as arrows between columns) from FNOL to payment, (8) Functional requirements grouped by module (Policyholder web, Policyholder mobile, Adjuster desktop, Integrations, Notifications) with IDs (FR-001 style), priority (Must, Should, Could, Won’t) and Given / When / Then acceptance criteria, (9) Non functional requirements (performance, availability, security, accessibility, data residency in Indonesia, Bahasa Indonesia primary and English secondary), (10) Data model as an entity table (Entity, Description, Key Attributes, Related Entities, Relationship) covering Policy, Policyholder, Claim, Document, Payment, (11) Integration list (system, direction, pattern, payload summary), (12) RAID references, (13) Acceptance and sign off. After section 7, generate a landscape target state swimlane hand off diagram image using Designer inside Copilot and insert it below the swimlane table. Style: process stages as column headers (FNOL Submission, Evidence Capture and Upload, Claim Reference Created, Triage and Assignment, Assessment and Workshop, Settlement and E Signature, Payment and Closure); swimlanes as row headers (Policyholder Web and Mobile, Web and Mobile Application, Claims Adjuster Internal Users, Fraud Screening, Workshop Network, Finance and Payment, Key Output and Hand off); each step in a rounded box with a small icon; solid arrows for process flow, dashed arrows for system interactions; a small legend and a review prompts callout in the bottom right; CGA brand palette (signature red header band, deep red accents, gold highlights, corporate charcoal text, soft neutral swimlane backgrounds); Inter font; clean, professional business consulting look, no fake text or logos. After section 10, generate a landscape data model diagram image using Designer inside Copilot showing the five entities Policy, Policyholder, Claim, Document, Payment as rounded boxes with key attributes as bullets, and relationships as labelled arrows with cardinality (1, 0..1, 1..N, N..N); same CGA brand palette and Inter font as the swimlane; header band reading Motor Claims Data Model. English, professional BA voice, ready for stakeholder review.</span></div>
+
+        <div class="callout"><b>Why in Word.</b> Draft with Copilot writes the full BRD in one pass with native tables for accuracy, then Designer inside Copilot generates the section 7 swimlane and section 10 data model diagrams as images. The Business Analyst can regenerate any diagram by refining the art direction in the prompt.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Copilot in Excel</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pa3" data-tab="premium">
+      <div class="step-num"><span>6</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium A3 · Copilot in Excel</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#fff4e5;color:#8B0A22;border-color:#F4B82E">PROJECT</span>
+        <h4>Build the RAID heatmap and PivotTable in one prompt</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in Excel</span><span class="arrow">→</span><span class="step-pill">Open 03_CGA_RAID_Log.xlsx</span><span class="arrow">→</span><span class="step-pill">Copilot pane</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Consolidate this RAID log into an executive dashboard on a new sheet called RAID_Dashboard I am the PMO Lead at Contoso General Assurance Indonesia. This will be reviewed weekly by the CTO. Use only the active workbook 03_CGA_RAID_Log.xlsx. Preserve the raw sheet untouched. On RAID_Dashboard produce: (1) a summary table counting items by category (Risk, Assumption, Issue, Dependency) and severity (High, Medium, Low), (2) a PivotTable with Owner as rows and Severity as columns, (3) a heatmap conditional formatting on the PivotTable, (4) a top 5 critical items list ranked by severity and status, (5) a formula that flags any item overdue by more than 14 days. Explain each formula in one line of plain English next to it. English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Consolidate this RAID log into an executive dashboard on a new sheet called RAID_Dashboard</span> <span class="c"><span class="lbl">C</span>I am the PMO Lead at Contoso General Assurance Indonesia. This will be reviewed weekly by the CTO</span>. <span class="s"><span class="lbl">S</span>Use only the active workbook 03_CGA_RAID_Log.xlsx. Preserve the raw sheet untouched</span>. <span class="e"><span class="lbl">E</span>On RAID_Dashboard produce: (1) a summary table counting items by category (Risk, Assumption, Issue, Dependency) and severity (High, Medium, Low), (2) a PivotTable with Owner as rows and Severity as columns, (3) a heatmap conditional formatting on the PivotTable, (4) a top 5 critical items list ranked by severity and status, (5) a formula that flags any item overdue by more than 14 days. Explain each formula in one line of plain English next to it. English.</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Copilot in PowerPoint</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pa4" data-tab="premium">
+      <div class="step-num"><span>7</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium A4 · Copilot in PowerPoint</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#fff4e5;color:#8B0A22;border-color:#F4B82E">PROJECT</span>
+        <h4>Steering committee deck from the brief</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in PowerPoint</span><span class="arrow">→</span><span class="step-pill">Create presentation from file</span><span class="arrow">→</span><span class="step-pill">02_CGA_SteeringCommitteeBrief.docx</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Create a 10 to 12 slide steering committee deck for the November review of the CGA Indonesia transformation portfolio (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API) Audience: CGA Board of Directors and executive sponsors. Tone: confident, calm, decision-oriented. Source: 02_CGA_SteeringCommitteeBrief.docx. Do not invent milestones or figures not present in the source. Slide flow: title, executive summary, RAG status, milestones completed, next milestones, RAID rollup, budget vs plan, blockers, 3 decisions requested, 90 day roadmap, appendix, closing. Speaker notes of 3 to 4 sentences per slide. Use built-in Designer style, minimalist. English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Create a 10 to 12 slide steering committee deck for the November review of the CGA Indonesia transformation portfolio (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API)</span> <span class="c"><span class="lbl">C</span>Audience: CGA Board of Directors and executive sponsors. Tone: confident, calm, decision-oriented</span>. <span class="s"><span class="lbl">S</span>Source: 02_CGA_SteeringCommitteeBrief.docx. Do not invent milestones or figures not present in the source</span>. <span class="e"><span class="lbl">E</span>Slide flow: title, executive summary, RAG status, milestones completed, next milestones, RAID rollup, budget vs plan, blockers, 3 decisions requested, 90 day roadmap, appendix, closing. Speaker notes of 3 to 4 sentences per slide. Use built-in Designer style, minimalist. English.</span></div>
+      </div>
+    </div>
+
+    <div class="step" data-step="pb3" data-tab="premium">
+      <div class="step-num"><span>8</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium B3 · Copilot in PowerPoint</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#e6f7ee;color:#166534;border-color:#86efac">OPERATIONS</span>
+        <h4>Case for change deck for the operations town hall</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in PowerPoint</span><span class="arrow">→</span><span class="step-pill">Create presentation from file</span><span class="arrow">→</span><span class="step-pill">04_CGA_ClaimsProcessTranscript.docx</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Create a 8 to 10 slide case for change deck for the claims transformation town hall covering the new motor, property fire and marine cargo claims process Audience: 120 regional claims adjusters and their supervisors across Jakarta, Surabaya, Medan, Bandung and Semarang, spanning the Motor, Property and Marine Cargo LOBs. I present it. Tone: honest about the pain today, confident about the fix, empathetic about the change. Source: 04_CGA_ClaimsProcessTranscript.docx (as-is pain points across motor and property fire) and 05_CGA_ClaimsOperationsSurvey.xlsx (quantified bottlenecks across all three LOBs). Do not invent metrics. Slide flow: title, why change now, top 3 pains today per LOB (with survey numbers), the new process at a glance per LOB, 3 benefits for the adjuster, 3 things that will feel different, training and go-live timeline, support channels, Q and A. Speaker notes of 3 to 4 sentences per slide. Use Designer style, minimalist. English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Create a 8 to 10 slide case for change deck for the claims transformation town hall on the new motor, property fire and marine cargo claims process</span> <span class="c"><span class="lbl">C</span>Audience: 120 regional claims adjusters and their supervisors across Jakarta, Surabaya, Medan, Bandung and Semarang, spanning the Motor, Property and Marine Cargo LOBs. I present it. Tone: honest about the pain today, confident about the fix, empathetic about the change</span>. <span class="s"><span class="lbl">S</span>Source: 04_CGA_ClaimsProcessTranscript.docx (as-is pain points across motor and property fire) and 05_CGA_ClaimsOperationsSurvey.xlsx (quantified bottlenecks across all three LOBs). Do not invent metrics</span>. <span class="e"><span class="lbl">E</span>Slide flow: title, why change now, top 3 pains today per LOB (with survey numbers), the new process at a glance per LOB, 3 benefits for the adjuster, 3 things that will feel different, training and go-live timeline, support channels, Q and A. Speaker notes of 3 to 4 sentences per slide. Use Designer style, minimalist. English.</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Copilot in Planner</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pa5" data-tab="premium">
+      <div class="step-num"><span>9</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium A5 · Copilot in Planner</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#fff4e5;color:#8B0A22;border-color:#F4B82E">PROJECT</span>
+        <h4>Turn the status report into a live plan</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft 365 Copilot</span><span class="arrow">→</span><span class="step-pill">Agents</span><span class="arrow">→</span><span class="step-pill">Planner</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Create a new Microsoft Planner plan for the CGA Indonesia transformation portfolio with buckets, tasks, owners and due dates I am the PMO Lead at Contoso General Assurance Indonesia. The delivery team has 40 people across 5 programmes: Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API. Go live is in 6 months. Use the milestones and workstreams in 01_CGA_ProjectStatusReport.docx and the risks in 03_CGA_RAID_Log.xlsx as source. Do not invent people. Assign tasks to workstream leads only. Produce: (1) 5 buckets, one per workstream, (2) 8 to 12 tasks per bucket with clear titles, owners (workstream lead), due dates aligned to the milestones, priority (Urgent / Important / Medium / Low), and 3 to 5 checklist items each, (3) a Milestones bucket with the 6 key gate reviews, (4) suggested labels for High Risk, Board Visible, External Dependency. Summarise the plan in 5 bullets at the end. English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Create a new Microsoft Planner plan for the CGA transformation portfolio (5 programmes) with buckets, tasks, owners and due dates</span> <span class="c"><span class="lbl">C</span>I am the PMO Lead at Contoso General Assurance Indonesia. The delivery team has 40 people across 5 programmes: Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API. Go live is in 6 months</span>. <span class="s"><span class="lbl">S</span>Use the milestones and workstreams in 01_CGA_ProjectStatusReport.docx and the risks in 03_CGA_RAID_Log.xlsx as source. Do not invent people. Assign tasks to workstream leads only</span>. <span class="e"><span class="lbl">E</span>Produce: (1) 5 buckets, one per workstream, (2) 8 to 12 tasks per bucket with clear titles, owners (workstream lead), due dates aligned to the milestones, priority (Urgent / Important / Medium / Low), and 3 to 5 checklist items each, (3) a Milestones bucket with the 6 key gate reviews, (4) suggested labels for High Risk, Board Visible, External Dependency. Summarise the plan in 5 bullets at the end. English.</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Copilot in Outlook (Draft with Copilot)</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pb4" data-tab="premium">
+      <div class="step-num"><span>10</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium B4 · Copilot in Outlook, Draft with Copilot</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#e6f7ee;color:#166534;border-color:#86efac">OPERATIONS</span>
+        <h4>Draft the change announcement email for 120 regional adjusters</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Outlook</span><span class="arrow">→</span><span class="step-pill">New email</span><span class="arrow">→</span><span class="step-pill">Draft with Copilot</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Draft a warm, reassuring change announcement email from the Head of Operations at Contoso General Assurance Indonesia to 120 regional claims adjusters across Motor, Property Fire and Marine Cargo, announcing the new to-be claims process. My audience is 120 regional adjusters across three lines of business and five branches (Jakarta, Surabaya, Medan, Bandung, Semarang), mixed tenure, some anxious about process change. Ground the email in the adjuster survey findings in 05_CGA_ClaimsOperationsSurvey.xlsx: the top three bottlenecks per LOB, the target claims TAT reductions (30 percent motor, 25 percent property fire, 20 percent marine cargo within six months), and the priority automations for each LOB. Do not invent numbers. Produce the full email: a warm opening, a plain-language summary of the new process, one line of empathy for each LOB, the go-live date, and a close inviting adjusters to the regional Q and A sessions in Jakarta, Surabaya and Medan. English, maximum 250 words, professional but human.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Draft a warm, reassuring change announcement email from the Head of Operations to 120 regional claims adjusters, announcing the new to-be claims process across Motor, Property Fire and Marine Cargo</span> <span class="c"><span class="lbl">C</span>I am the Head of Operations at Contoso General Assurance Indonesia. Audience is 120 adjusters across three lines of business and five branches (Jakarta, Surabaya, Medan, Bandung, Semarang), mixed tenure, some anxious about process change</span>. <span class="s"><span class="lbl">S</span>Ground the email in the adjuster survey findings in 05_CGA_ClaimsOperationsSurvey.xlsx: the top three bottlenecks per LOB, the target claims TAT reductions (30 percent motor, 25 percent property fire, 20 percent marine cargo within six months), and the priority automations for each LOB. Do not invent numbers</span>. <span class="e"><span class="lbl">E</span>Full email with warm opening, plain-language process summary, one line of empathy per LOB, go-live date, close inviting adjusters to the regional Q and A sessions in Jakarta, Surabaya and Medan. English, maximum 250 words, professional but human.</span></div>
+
+        <div class="callout"><b>Tip.</b> After Copilot generates the draft, click <b>Coaching by Copilot</b> in the same email to score the tone, clarity and reader sentiment, then apply one refinement before you send.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-sep premium">Copilot Cowork</div>
+
+  <div class="steps">
+
+    <div class="step" data-step="pa6" data-tab="premium">
+      <div class="step-num"><span>11</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium A6 · Copilot Cowork</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#fff4e5;color:#8B0A22;border-color:#F4B82E">PROJECT</span>
+        <h4>Assemble the full steering committee pack in one prompt</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft 365 Copilot Chat</span><span class="arrow">→</span><span class="step-pill">Cowork panel</span><span class="arrow">→</span><span class="step-pill">Attach files</span><span class="arrow">→</span><span class="step-pill">Approve each artefact</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Assemble the complete November steering committee pack for the CGA Indonesia transformation portfolio in one workflow. Deliver six artefacts. I am the PMO Lead at Contoso General Assurance Indonesia briefing the CTO, CEO and executive sponsors on the five programmes: Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API. Use only 01_CGA_ProjectStatusReport.docx, 02_CGA_SteeringCommitteeBrief.docx and 03_CGA_RAID_Log.xlsx. Do not invent milestones, owners or numbers. Produce, showing each artefact for my approval before moving on: (1) a Word executive brief, two pages, RAG status, top risks, decisions requested, (2) a PowerPoint steering deck, ten to twelve slides, with speaker notes, (3) an Excel RAID_Dashboard sheet inside the existing RAID workbook with pivot and heatmap, (4) a fully interactive HTML one page status portal ready to publish to the PMO SharePoint, mobile friendly, self contained in a single .html file with inline CSS and JavaScript, including working filters (RAG status: Red/Amber/Green; programme: 5 workstreams), expand and collapse per programme card, a top risk toggle to show or hide detail, and a print button, (5) a draft Outlook email to the sponsor group with the deck attached and the three decisions highlighted, (6) a Teams meeting invite for the steering committee at 10:00 Jakarta time on the second Friday of November, with agenda in the body. English, calm and factual.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Assemble the complete November steering committee pack for the CGA Indonesia transformation portfolio in one workflow, delivering six artefacts (Word, PowerPoint, Excel, HTML, email draft, meeting invite)</span> <span class="c"><span class="lbl">C</span>I am the PMO Lead at Contoso General Assurance Indonesia briefing the CTO, CEO and executive sponsors on the five programmes: Motor and Property Claims Platform, Marine Cargo Digital Onboarding, Bancassurance Integration, Sharia Launch, Auto Manufacturer API</span>. <span class="s"><span class="lbl">S</span>Use only 01_CGA_ProjectStatusReport.docx, 02_CGA_SteeringCommitteeBrief.docx and 03_CGA_RAID_Log.xlsx. Do not invent milestones, owners or numbers</span>. <span class="e"><span class="lbl">E</span>Show each artefact for my approval before moving on. (1) Word executive brief, two pages, RAG status, top risks, decisions requested. (2) PowerPoint steering deck, 10 to 12 slides with speaker notes. (3) Excel RAID_Dashboard sheet inside the RAID workbook, pivot and heatmap. (4) Fully interactive HTML one page status portal, mobile friendly, self contained single .html file, working filters (RAG status Red/Amber/Green; 5 workstreams), expand/collapse per programme, top risk toggle, print button. (5) Draft Outlook email to the sponsor group with the deck attached and the three decisions highlighted. (6) Teams meeting invite for the steering committee at 10:00 Jakarta time on the second Friday of November with agenda in the body. English, calm and factual.</span></div>
+
+        <div class="callout"><b>Why Cowork.</b> One prompt, six artefacts across Word, PowerPoint, Excel, HTML, Outlook and Teams. Cowork keeps context across the whole task and pauses for your approval before it produces the next artefact.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step="pb5" data-tab="premium">
+      <div class="step-num"><span>12</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Premium B5 · Copilot Cowork</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#e6f7ee;color:#166534;border-color:#86efac">OPERATIONS</span>
+        <h4>Assemble the full claims transformation pack in one prompt</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft 365 Copilot Chat</span><span class="arrow">→</span><span class="step-pill">Cowork panel</span><span class="arrow">→</span><span class="step-pill">Attach files</span><span class="arrow">→</span><span class="step-pill">Approve each artefact</span>
+        </div>
+
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Assemble the complete claims transformation pack for the CGA Indonesia CEO briefing in one workflow. Deliver six artefacts. I am the Head of Operations at Contoso General Assurance Indonesia. My audience is the CEO for approval and 120 regional adjusters across motor, property fire and marine cargo in Jakarta, Surabaya, Medan, Bandung and Semarang. Use only 04_CGA_ClaimsProcessTranscript.docx, 05_CGA_ClaimsOperationsSurvey.xlsx and 06_CGA_UnderwritingPolicyManual.docx. Do not invent data. Produce, showing each artefact for my approval before moving on: (1) a Word as-is and to-be process pack, structured per LOB with owners and hand offs, (2) a PowerPoint town hall deck, twelve to fifteen slides for the adjuster town hall, warm and reassuring, with speaker notes, (3) an Excel bottleneck analysis workbook with a per-LOB TAT breakdown, PivotTable and conditional formatting, (4) a fully interactive HTML case for change one pager ready for the intranet, mobile friendly, self contained in a single .html file with inline CSS and JavaScript, including working filters (LOB: Motor/Property Fire/Marine Cargo; Region: Jakarta/Surabaya/Medan/Bandung/Semarang), expand and collapse per section (as-is, to-be, gap, impact), a bottleneck toggle to show or hide detail, and a print button, (5) a draft Outlook email to all 120 adjusters announcing the change with the deck attached, coached for a warmer tone, (6) three Teams meeting invites for regional Q and A sessions in Jakarta, Surabaya and Medan next month, agenda in the body. English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Assemble the complete claims transformation pack for the CGA Indonesia CEO briefing in one workflow, delivering six artefacts (Word, PowerPoint, Excel, HTML, email draft, three regional meeting invites)</span> <span class="c"><span class="lbl">C</span>I am the Head of Operations at Contoso General Assurance Indonesia. My audience is the CEO for approval and 120 regional adjusters across motor, property fire and marine cargo in Jakarta, Surabaya, Medan, Bandung and Semarang</span>. <span class="s"><span class="lbl">S</span>Use only 04_CGA_ClaimsProcessTranscript.docx, 05_CGA_ClaimsOperationsSurvey.xlsx and 06_CGA_UnderwritingPolicyManual.docx. Do not invent data</span>. <span class="e"><span class="lbl">E</span>Show each artefact for my approval before moving on. (1) Word as-is and to-be process pack, per LOB with owners and hand offs. (2) PowerPoint town hall deck, 12 to 15 slides, warm and reassuring, with speaker notes. (3) Excel bottleneck analysis workbook with a per-LOB TAT breakdown, PivotTable and conditional formatting. (4) Fully interactive HTML case for change one pager, mobile friendly, self contained single .html file, working filters (LOB: Motor/Property Fire/Marine Cargo; Region: Jakarta/Surabaya/Medan/Bandung/Semarang), expand/collapse per section, bottleneck toggle, print button. (5) Draft Outlook email to all 120 adjusters announcing the change with the deck attached, coached for a warmer tone. (6) Three Teams meeting invites for regional Q and A sessions in Jakarta, Surabaya and Medan next month, agenda in the body. English.</span></div>
+
+        <div class="callout"><b>Why Cowork.</b> Six artefacts, one prompt, one thread of context. Word, PowerPoint, Excel, HTML, email and meeting invites all produced with your approval before each step.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout"><b>Why Premium matters.</b> Copilot Chat is the entry point everyone at CGA gets. The prompts above show what the paid Microsoft 365 Copilot licence unlocks: <b>Researcher</b> for deep web citations, <b>Analyst</b> for Python grade data analysis, <b>in app Copilot</b> for grounded drafting, formula reasoning, deck generation and email coaching directly inside your Office files, and <b>Cowork</b> to assemble Word, PowerPoint, Excel, interactive HTML, email and Teams meeting invites in one workflow.</div>
+
+  <div class="complete-banner" id="premium-complete">
+    <div class="check">✓</div>
+    <div>
+      <h4>Premium complete.</h4>
+      <p>You have run all eleven Premium prompts across eight products. Ready for Tips.</p>
+    </div>
+  </div>
+
+  <div class="lab-nav">
+    <button class="secondary" data-go="copilotchat">← Back to Copilot Chat</button>
+    <button data-go="tips">Next: Tips →</button>
+  </div>
+</div>
+
+
+<!-- ============ TAB 1 · SAMPLE FILES ============ -->
+<div class="view" id="view-files">
+  <div class="uc-header">
+    <div class="uc-badge">1</div>
+    <div style="flex:1">
+      <h2>Sample files</h2>
+      <p class="uc-sub">Download for the exercises. All files are synthetic; safe to use in demos.</p>
+      <div class="uc-tags">
+        <span class="uc-tag">9 files</span>
+        <span class="uc-tag">Word and Excel</span>
+        <span class="uc-tag">Synthetic data</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn"><b>All sample files are synthetic.</b> Entity names and numbers are fabricated for training purposes only. No real CGA data.</div>
+
+  <a class="download-card" href="CGA_All_Sample_Files.zip" download style="display:flex;margin:20px 0 24px;padding:20px;border:2px solid var(--red-500);background:linear-gradient(135deg,var(--red-50),#fff5eb);box-shadow:0 4px 20px rgba(200,16,46,.12)">
+    <div class="file-icon" style="width:64px;height:64px;font-size:17px;background:var(--red-500)">ZIP</div>
+    <div class="file-info" style="padding-left:4px">
+      <div class="file-name" style="font-size:18px">📦 Download all 9 files (ZIP)</div>
+      <div class="file-desc" style="font-size:17px;margin-top:4px">One click download of the complete sample bundle: 7 Word documents and 2 Excel workbooks used across the Copilot Chat and Premium activities.</div>
+    </div>
+    <div class="dl-arrow" style="font-size:28px">↓</div>
+  </a>
+
+  <div class="download-grid">
+    <a class="download-card" href="01_CGA_ProjectStatusReport.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">01_CGA_ProjectStatusReport.docx</div>
+        <div class="file-desc">Copilot Chat A1 (Project) and Premium A1, A2, A5, A6. Four page status report for the CGA Indonesia transformation portfolio (Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API), with milestones, RAID summary, budget burn and RAG status.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="02_CGA_SteeringCommitteeBrief.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">02_CGA_SteeringCommitteeBrief.docx</div>
+        <div class="file-desc">Premium A4 and A6 (Project). Three page raw brief with bullet notes for the November steering committee, ready to be turned into a deck.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="03_CGA_RAID_Log.xlsx" download>
+      <div class="file-icon xl">X</div>
+      <div class="file-info">
+        <div class="file-name">03_CGA_RAID_Log.xlsx</div>
+        <div class="file-desc">Copilot Chat A2 (Project) and Premium A3, A5, A6. Consolidated RAID log with 25 rows across Risks, Assumptions, Issues and Dependencies, spanning the Motor and Property Claims Platform, Marine Cargo Digital Onboarding, Bancassurance Integration, Sharia Launch and Auto Manufacturer API programmes, with owner, severity, mitigation and status.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="04_CGA_ClaimsProcessTranscript.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">04_CGA_ClaimsProcessTranscript.docx</div>
+        <div class="file-desc">Copilot Chat B1 (Operations) and Premium B3, B5. Five page transcript of a claims operations workshop covering motor claims and commercial property or fire claims, with Jakarta and Surabaya branch attendance.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="05_CGA_ClaimsOperationsSurvey.xlsx" download>
+      <div class="file-icon xl">X</div>
+      <div class="file-info">
+        <div class="file-name">05_CGA_ClaimsOperationsSurvey.xlsx</div>
+        <div class="file-desc">Copilot Chat B2 (Operations) and Premium B1, B3, B5. Adjuster feedback survey, 40 rows across three lines of business (Motor, Property, Marine Cargo) and 5 regional offices, with satisfaction score, top bottleneck category, and average TAT per process step.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="06_CGA_UnderwritingPolicyManual.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">06_CGA_UnderwritingPolicyManual.docx</div>
+        <div class="file-desc">Premium B2 and B5 (Operations). Six page policy manual excerpt for commercial property underwriting, ready for SOP rewrite.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="07_CGA_BrandGuidelines.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">07_CGA_BrandGuidelines.docx</div>
+        <div class="file-desc">Shared reference. Contoso General Assurance brand voice and tone guide, useful for any prompt that mentions the CGA voice.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="08_CGA_OJK_Circular_Sample.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">08_CGA_OJK_Circular_Sample.docx</div>
+        <div class="file-desc">Copilot Chat General 1. Synthetic OJK style circular on claims TAT for Motor, Property Fire and Marine Cargo. Attach in Copilot Chat and ask for a change summary and 30 day action list.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+    <a class="download-card" href="09_CGA_BrokerInboundEmail.docx" download>
+      <div class="file-icon">W</div>
+      <div class="file-info">
+        <div class="file-name">09_CGA_BrokerInboundEmail.docx</div>
+        <div class="file-desc">Copilot Chat General 2. Synthetic inbound email from a broker requesting a commercial property All Risks quote. Paste into Copilot Chat and ask for a bilingual reply in the CGA voice.</div>
+      </div>
+      <div class="dl-arrow">↓</div>
+    </a>
+  </div>
+
+  <div class="lab-nav">
+    <button class="secondary" data-go="intro">← Back to Get Started</button>
+    <button data-go="copilotchat">Next: Copilot Chat →</button>
+  </div>
+</div>
+
+<!-- ============ TAB 5 · TIPS ============ -->
+<div class="view" id="view-tips">
+  <div class="uc-header">
+    <div class="uc-badge">5</div>
+    <div style="flex:1">
+      <h2>Tips and prompts</h2>
+      <p class="uc-sub">Quick reference for after the session.</p>
+      <div class="uc-tags">
+        <span class="uc-tag">Prompt hygiene</span>
+        <span class="uc-tag">Common patterns</span>
+        <span class="uc-tag">What Copilot will not do</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card" style="margin-top:16px">
+    <h4><span class="icon">✍</span> Prompt hygiene for CGA</h4>
+    <ul>
+      <li><strong>Start with role.</strong> "I am the PMO Lead / Head of Operations / underwriter at Contoso General Assurance Indonesia". This alone lifts quality.</li>
+      <li><strong>Name the audience.</strong> "steering committee", "regional claims team", "underwriters, 1 to 15 years experience". Copilot calibrates tone accordingly.</li>
+      <li><strong>Say the language.</strong> "Bahasa Indonesia formal" or "English, calm and factual". Do not assume.</li>
+      <li><strong>Set the length.</strong> "300 words", "one page", "12 bullet points". Vague length equals vague output.</li>
+      <li><strong>Cite the source.</strong> "Use the attached file 03_CGA_RAID_Log.xlsx", or "Use publicly available AAJI/AAUI data" if grounding externally.</li>
+    </ul>
+  </div>
+
+  <div class="info-card" style="margin-top:16px">
+    <h4><span class="icon">🔁</span> Common patterns</h4>
+    <ul>
+      <li><strong>Turn a doc into a deck.</strong> Copilot Chat, "Create a presentation from 02_CGA_SteeringCommitteeBrief.docx".</li>
+      <li><strong>Turn a transcript into a process map.</strong> Copilot in Word, ask for an as-is table with owners and hand-offs.</li>
+      <li><strong>Turn a survey into a to-be design.</strong> Copilot Chat with the xlsx, ask for bottlenecks plus KPIs plus a to-be process step table.</li>
+      <li><strong>Turn a policy manual into an SOP.</strong> Prompt-in-doc inside the manual, request a new SOP grounded on a specific section.</li>
+      <li><strong>Turn a to-be design into a warm change email.</strong> Outlook, Draft with Copilot from the Chat B2 output, then Coaching for a final tone check.</li>
+    </ul>
+  </div>
+
+  <div class="callout warn"><b>What Copilot will not do for CGA.</b> Approve a claim, bind a policy, price a risk, replace an underwriter's judgement, or read data outside your Microsoft 365 tenant unless you connect it. Copilot accelerates the humans; it does not replace them.</div>
+
+  <div class="lab-nav">
+    <button class="secondary" data-go="tips">← Back to Premium</button>
+    <button disabled>Next →</button>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  Contoso General Assurance Indonesia, M365 Copilot Immersion Guide, Workshop Edition 2026<br>
+  Powered by Microsoft 365 Copilot, Copilot in Word, Excel, PowerPoint, Outlook, Planner, and Copilot Cowork.<br>
+  Confidential, internal use only.
+</footer>
+
+</div>
+
+<script>
+/* ============ PASSWORD GATE ============ */
+const HASH = "d1bc358a1d8b969b251c1bc5182e9fa13f27c7dd5583cdea898e4d6d418e8c98";
+async function sha256(s){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+}
+async function unlock(){
+  const el = document.getElementById("pw");
+  const err = document.getElementById("err");
+  const val = el.value.trim();
+  if(!val){ err.textContent = "Please enter the session password."; return; }
+  const h = await sha256(val);
+  if(h === HASH){
+    sessionStorage.setItem("cga_unlocked","1");
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    initApp();
+  } else {
+    err.textContent = "Incorrect password. Please try again or contact the facilitator.";
+    el.value = "";
+    el.focus();
+  }
+}
+function togglePw(){
+  const el = document.getElementById("pw");
+  el.type = el.type === "password" ? "text" : "password";
+}
+
+/* ============ TAB NAVIGATION ============ */
+const TAB_KEY = "cga_tab";
+const STEP_KEY = "cga_steps";
+const MODE_KEY = "cga_gcse";
+
+function switchView(target){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === target));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + target));
+  try{ localStorage.setItem(TAB_KEY, target); }catch(e){}
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============ STEP CHECK ============ */
+function stepId(el){ return el.closest('.step').getAttribute('data-step'); }
+
+function toggleStep(check){
+  const step = check.closest('.step');
+  const id = step.getAttribute('data-step');
+  const now = !step.classList.contains('completed');
+  step.classList.toggle('completed', now);
+  const done = JSON.parse(localStorage.getItem(STEP_KEY) || '{}');
+  if(now) done[id] = 1; else delete done[id];
+  try{ localStorage.setItem(STEP_KEY, JSON.stringify(done)); }catch(e){}
+  updateProgress();
+}
+
+function restoreSteps(){
+  let done = {};
+  try{ done = JSON.parse(localStorage.getItem(STEP_KEY) || '{}'); }catch(e){}
+  document.querySelectorAll('.step').forEach(s => {
+    const id = s.getAttribute('data-step');
+    if(done[id]) s.classList.add('completed');
+  });
+}
+
+function currentTab(){
+  const t = document.querySelector('.tab.active');
+  return t ? t.dataset.view : 'intro';
+}
+
+function updateProgress(){
+  const tab = currentTab();
+  const steps = document.querySelectorAll('.step[data-tab="' + tab + '"]');
+  const total = steps.length;
+  const done = document.querySelectorAll('.step[data-tab="' + tab + '"].completed').length;
+  document.getElementById('p-total').textContent = total;
+  document.getElementById('p-done').textContent = done;
+  const pct = total ? (done / total * 100) : 0;
+  document.getElementById('p-fill').style.width = pct + '%';
+  // complete banner
+  const banner = document.getElementById(tab + '-complete');
+  if(banner) banner.classList.toggle('show', total > 0 && done === total);
+  // tab done marker
+  document.querySelectorAll('.tab').forEach(t => {
+    const tId = t.dataset.view;
+    const tSteps = document.querySelectorAll('.step[data-tab="' + tId + '"]');
+    const tDone = document.querySelectorAll('.step[data-tab="' + tId + '"].completed').length;
+    t.classList.toggle('done', tSteps.length > 0 && tDone === tSteps.length);
+  });
+}
+
+function resetProgress(){
+  if(!confirm('Reset all completed steps in this browser?')) return;
+  try{ localStorage.removeItem(STEP_KEY); }catch(e){}
+  document.querySelectorAll('.step.completed').forEach(s => s.classList.remove('completed'));
+  document.querySelectorAll('.complete-banner').forEach(b => b.classList.remove('show'));
+  updateProgress();
+}
+
+/* ============ GCSE MODE ============ */
+function setMode(gcse){
+  document.body.classList.toggle('gcse', gcse);
+  document.querySelectorAll('[id^="btn-plain-"]').forEach(b => b.classList.toggle('on', !gcse));
+  document.querySelectorAll('[id^="btn-gcse-"]').forEach(b => b.classList.toggle('on', gcse));
+  try{ localStorage.setItem(MODE_KEY, gcse ? '1' : '0'); }catch(e){}
+}
+function restoreMode(){
+  let gcse = false;
+  try{ gcse = localStorage.getItem(MODE_KEY) === '1'; }catch(e){}
+  setMode(gcse);
+}
+
+/* ============ COPY BUTTON ============ */
+function cp(btn){
+  const parent = btn.parentElement;
+  const clone = parent.cloneNode(true);
+  clone.querySelectorAll('.copy-btn, .plabel, .lbl').forEach(n => n.remove());
+  const text = clone.textContent.replace(/\s+/g, ' ').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    const old = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1400);
+  }).catch(() => {
+    btn.textContent = 'Copy failed';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 1400);
+  });
+}
+
+/* ============ INIT ============ */
+function initApp(){
+  restoreMode();
+  restoreSteps();
+  // Wire tabs
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => switchView(t.dataset.view));
+  });
+  document.querySelectorAll('[data-go]').forEach(b => {
+    b.addEventListener('click', () => switchView(b.dataset.go));
+  });
+  // Restore last tab
+  let last = 'intro';
+  try{ last = localStorage.getItem(TAB_KEY) || 'intro'; }catch(e){}
+  if(document.getElementById('view-' + last)) switchView(last);
+  else updateProgress();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if(sessionStorage.getItem('cga_unlocked') === '1'){
+    document.getElementById('lock').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    const pw = document.getElementById('pw');
+    if(pw){
+      pw.addEventListener('keydown', e => { if(e.key === 'Enter') unlock(); });
+      pw.focus();
+    }
+  }
+});
+</script>
+</body>
+</html>
