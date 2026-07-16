@@ -318,7 +318,8 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <button class="tab" data-view="files"><span class="tab-num">1</span> Sample Files</button>
   <button class="tab" data-view="copilotchat"><span class="tab-num">2</span> Copilot Chat</button>
   <button class="tab" data-view="premium"><span class="tab-num">3</span> Premium</button>
-  <button class="tab" data-view="tips"><span class="tab-num">4</span> Tips</button>
+  <button class="tab" data-view="leadership"><span class="tab-num">4</span> Leadership</button>
+  <button class="tab" data-view="tips"><span class="tab-num">5</span> Tips</button>
 </nav>
 
 <main>
@@ -329,7 +330,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="uc-badge">0</div>
     <div style="flex:1">
       <h2>Welcome to the CGA M365 Copilot Immersion</h2>
-      <p class="uc-sub">Two tabs, eighteen activities, bilingual prompts, ready in two hours.</p>
+      <p class="uc-sub">Three tabs, twenty four activities, bilingual prompts, ready in two hours forty five minutes.</p>
       <div class="uc-tags">
         <span class="uc-tag duration">2 hours</span>
         <span class="uc-tag level">All levels</span>
@@ -366,6 +367,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
         <li><strong>Copilot Chat</strong>: 2 General plus 2 Project plus 2 Operations activities</li>
         <li><strong>Premium</strong>: 12 prompts grouped by product (Researcher, Analyst, Word, Excel, PowerPoint, Planner, Outlook, Cowork)</li>
         <li>Each Premium card is tagged <strong>Project</strong> or <strong>Operations</strong></li>
+        <li><strong>Leadership</strong>: 6 prompts for the CGA C-suite (CEO, COO, CFO, CTO)</li>
         <li><strong>Bahasa Indonesia and English</strong> for every activity</li>
       </ul>
     </div>
@@ -874,13 +876,13 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
     <div class="check">✓</div>
     <div>
       <h4>Premium complete.</h4>
-      <p>You have run all eleven Premium prompts across eight products. Ready for Tips.</p>
+      <p>You have run all twelve Premium prompts across eight products. Next up, Leadership.</p>
     </div>
   </div>
 
   <div class="lab-nav">
     <button class="secondary" data-go="copilotchat">← Back to Copilot Chat</button>
-    <button data-go="tips">Next: Tips →</button>
+    <button data-go="leadership">Next: Leadership →</button>
   </div>
 </div>
 
@@ -992,6 +994,175 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   </div>
 </div>
 
+
+<!-- ============ TAB 4 · LEADERSHIP ============ -->
+<div class="view" id="view-leadership">
+  <div class="uc-header">
+    <div class="uc-badge">4</div>
+    <div style="flex:1">
+      <h2>Leadership, for the CGA C-suite</h2>
+      <p class="uc-sub">Six strategic prompts designed for the CEO, COO, CFO and CTO of Contoso General Assurance Indonesia. Each activity produces a boardroom ready artefact grounded in the same programme data used in Chat and Premium.</p>
+      <div class="uc-tags">
+        <span class="uc-tag duration">45 min</span>
+        <span class="uc-tag level">Strategic</span>
+        <span class="uc-tag">M365 Copilot licence</span>
+        <span class="uc-tag">Researcher · Analyst · Word · PowerPoint · Chat · Cowork</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="label">YOUR SCENARIO</div>
+    <div class="body">
+      You are a member of the CGA Indonesia executive committee preparing for the November board meeting. The transformation programme is halfway through its 12 month plan, OJK has just issued a new claims TAT circular, and the ExCo needs to align on market response, capital position and delivery risk before the Board. Copilot runs across your day: Researcher for external intel, Analyst for financial impact, Copilot in PowerPoint and Word for board artefacts, Copilot Chat for meeting follow up, and Cowork to assemble the full executive briefing pack in one workflow.
+    </div>
+  </div>
+
+  <div class="mode-bar">
+    <span class="lbl">Prompt mode</span>
+    <div class="gcse-toggle" role="tablist">
+      <button id="btn-plain-l" class="on" onclick="setMode(false)">Plain</button>
+      <button id="btn-gcse-l" onclick="setMode(true)">GCSE colour coded</button>
+    </div>
+    <div class="legend">
+      <span class="l-g">Goal</span><span class="l-c">Context</span><span class="l-s">Source</span><span class="l-e">Expectation</span>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Researcher agent · CEO and COO</div>
+
+  <div class="steps">
+    <div class="step" data-step="l1" data-tab="leadership">
+      <div class="step-num"><span>1</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Leadership L1 · Researcher</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#eef2ff;color:#3730a3;border-color:#a5b4fc">LEADERSHIP</span>
+        <h4>ASEAN general insurance market intelligence for the November board</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft 365 Copilot</span><span class="arrow">→</span><span class="step-pill">Agents</span><span class="arrow">→</span><span class="step-pill">Researcher</span>
+        </div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Produce a board grade market intelligence briefing on the ASEAN general insurance market for the November CGA Indonesia board meeting. I am the CEO of Contoso General Assurance Indonesia briefing the CEO, COO, CFO, CTO and independent directors. Focus geographies: Indonesia primary, then Malaysia, Thailand, Vietnam, Philippines, Singapore. Focus lines of business: motor, property fire, marine cargo, engineering, sharia. Use only credible public sources: OJK, Bank Indonesia, ASEAN Insurance Council, Swiss Re Sigma, S and P Global Ratings, Fitch Ratings, top three ASEAN insurer annual reports, top three global broker outlooks. Cite every material claim. Do not invent figures. Produce (1) market size and growth by country for the past 3 years with 3 year forward view, (2) top 5 structural trends (digital claims, embedded insurance, climate risk, sharia growth, regulatory tightening) each with 2 supporting data points, (3) competitor scan on the top 5 ASEAN insurers with GWP, combined ratio, digital claims maturity, (4) OJK regulatory outlook including the November 2026 claims TAT circular and any pending changes, (5) 5 implications for CGA Indonesia with a recommended board level response, (6) 3 open questions the board should discuss. Executive tone, 1500 words plus tables, English, ready to paste into Word.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Produce a board grade market intelligence briefing on the ASEAN general insurance market for the November CGA Indonesia board meeting</span> <span class="c"><span class="lbl">C</span>I am the CEO of Contoso General Assurance Indonesia briefing the CEO, COO, CFO, CTO and independent directors. Focus geographies: Indonesia primary, then Malaysia, Thailand, Vietnam, Philippines, Singapore. Focus LOBs: motor, property fire, marine cargo, engineering, sharia</span>. <span class="s"><span class="lbl">S</span>Use only credible public sources (OJK, Bank Indonesia, ASEAN Insurance Council, Swiss Re Sigma, S and P, Fitch, top ASEAN insurer annual reports, global broker outlooks). Cite every material claim. Do not invent figures</span>. <span class="e"><span class="lbl">E</span>Deliver (1) market size and growth by country, 3 year back and 3 year forward, (2) top 5 structural trends with 2 data points each, (3) competitor scan top 5 ASEAN insurers (GWP, combined ratio, digital claims maturity), (4) OJK regulatory outlook including the November 2026 claims TAT circular, (5) 5 implications for CGA with a recommended board response, (6) 3 open questions for the board. Executive tone, 1500 words plus tables, English.</span></div>
+        <div class="callout"><b>Why Researcher.</b> Researcher runs a multi step deep search over trusted public sources with inline citations, so the board briefing is defensible.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Analyst agent · CFO</div>
+
+  <div class="steps">
+    <div class="step" data-step="l2" data-tab="leadership">
+      <div class="step-num"><span>2</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Leadership L2 · Analyst</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#eef2ff;color:#3730a3;border-color:#a5b4fc">LEADERSHIP</span>
+        <h4>Financial impact of claims TAT delay on the combined ratio</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft 365 Copilot</span><span class="arrow">→</span><span class="step-pill">Agents</span><span class="arrow">→</span><span class="step-pill">Analyst</span><span class="arrow">→</span><span class="step-pill">Attach 05_CGA_ClaimsOperationsSurvey.xlsx and 03_CGA_RAID_Log.xlsx</span>
+        </div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Quantify the financial impact of the current claims TAT profile on the CGA Indonesia combined ratio and produce a CFO board pack view. I am the CFO of Contoso General Assurance Indonesia. Audience: CEO, COO, CTO and Board audit and risk committee. Use only the attached files 05_CGA_ClaimsOperationsSurvey.xlsx (40 adjuster survey rows across motor, property fire, marine cargo in 5 branches with satisfaction, top bottleneck and average TAT) and 03_CGA_RAID_Log.xlsx (25 risk items). Do not invent numbers. Where data is missing, state the assumption clearly. Deliver (1) current TAT distribution per LOB and per branch as a table, (2) an estimated leakage figure per LOB using a transparent assumption pack for leakage per day (state the assumption), (3) modelled combined ratio impact for baseline, on target and stretch scenarios (30 percent TAT reduction motor, 25 percent property fire, 20 percent marine cargo), (4) 3 investment options with payback and NPV assuming an 8 year horizon, discount rate 12 percent, (5) top 3 audit and risk committee questions to expect. Format as an Excel style table set plus a 300 word executive commentary, English.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Quantify the financial impact of the current claims TAT profile on the CGA Indonesia combined ratio and produce a CFO board pack view</span> <span class="c"><span class="lbl">C</span>I am the CFO briefing the CEO, COO, CTO and Board audit and risk committee</span>. <span class="s"><span class="lbl">S</span>Use only 05_CGA_ClaimsOperationsSurvey.xlsx and 03_CGA_RAID_Log.xlsx. Do not invent numbers. State any assumption clearly</span>. <span class="e"><span class="lbl">E</span>Deliver (1) current TAT distribution per LOB and branch, (2) estimated leakage per LOB with transparent assumptions, (3) combined ratio impact for baseline, on target and stretch scenarios (30 / 25 / 20 percent TAT reduction), (4) 3 investment options with payback and NPV (8 year horizon, 12 percent discount rate), (5) top 3 audit and risk committee questions. Excel style tables plus 300 word executive commentary, English.</span></div>
+        <div class="callout"><b>Why Analyst.</b> Analyst runs Python quietly on your files, so the CFO gets defensible numbers with the assumption pack shown.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Copilot in PowerPoint · CEO</div>
+
+  <div class="steps">
+    <div class="step" data-step="l3" data-tab="leadership">
+      <div class="step-num"><span>3</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Leadership L3 · Copilot in PowerPoint</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#eef2ff;color:#3730a3;border-color:#a5b4fc">LEADERSHIP</span>
+        <h4>Quarterly board deck for the transformation portfolio</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in PowerPoint</span><span class="arrow">→</span><span class="step-pill">Create presentation from file</span><span class="arrow">→</span><span class="step-pill">Reference 01_CGA_ProjectStatusReport.docx and 02_CGA_SteeringCommitteeBrief.docx</span>
+        </div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Create a 15 slide board grade quarterly review deck for the CGA Indonesia transformation portfolio. I am the CEO of Contoso General Assurance Indonesia presenting to the Board. Programmes: Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer Partnership API. Use only 01_CGA_ProjectStatusReport.docx and 02_CGA_SteeringCommitteeBrief.docx as source. Do not invent milestones, budget or numbers. Structure: (1) title, (2) agenda, (3) headline RAG per programme, (4) portfolio scorecard KPI dashboard, (5) top achievements this quarter, (6) top 5 risks and mitigation owners, (7) budget position (approved, committed, spent, remaining), (8) delivery milestones next quarter, (9) OJK regulatory outlook, (10) market intelligence summary from Researcher, (11) financial impact summary from Analyst, (12) 3 board decisions requested with recommended option, (13) capital and reinsurance implications, (14) appendix RAID summary, (15) closing message and next review date. Use CGA brand style, English, executive tone, one clear message per slide, chart or table on every substantive slide. Insert speaker notes for slides 3 to 13 with a 90 second script per slide.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Create a 15 slide board grade quarterly review deck for the CGA Indonesia transformation portfolio</span> <span class="c"><span class="lbl">C</span>I am the CEO presenting to the Board. Five programmes: Motor and Property Claims Platform Modernisation, Marine Cargo Digital Onboarding, Bancassurance Distribution Integration, Sharia Product Launch, Auto Manufacturer API</span>. <span class="s"><span class="lbl">S</span>Use only 01_CGA_ProjectStatusReport.docx and 02_CGA_SteeringCommitteeBrief.docx. Do not invent milestones, budget or numbers</span>. <span class="e"><span class="lbl">E</span>15 slides: title, agenda, headline RAG, portfolio scorecard, quarter achievements, top 5 risks, budget position, next quarter milestones, OJK outlook, market intel summary, financial impact, 3 board decisions, capital implications, appendix RAID, closing. CGA brand style, executive tone, one message per slide, chart or table on every substantive slide, speaker notes on slides 3 to 13 (90 seconds each).</span></div>
+        <div class="callout"><b>Why PowerPoint.</b> Copilot builds the deck from your source docs and gives you speaker notes, so the CEO can focus on the story not the slides.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Copilot Chat · Full C-suite</div>
+
+  <div class="steps">
+    <div class="step" data-step="l4" data-tab="leadership">
+      <div class="step-num"><span>4</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Leadership L4 · Copilot Chat with Teams recap</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#eef2ff;color:#3730a3;border-color:#a5b4fc">LEADERSHIP</span>
+        <h4>ExCo meeting action register from the Teams recap</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft Teams</span><span class="arrow">→</span><span class="step-pill">Recap of the ExCo meeting</span><span class="arrow">→</span><span class="step-pill">Copilot Chat</span><span class="arrow">→</span><span class="step-pill">Ask about this meeting</span>
+        </div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>From the most recent CGA Indonesia ExCo Teams meeting recap, produce an action register the CEO can send to the C-suite within one hour of the meeting. I am the Chief of Staff to the CEO of Contoso General Assurance Indonesia. Attendees: CEO, COO, CFO, CTO, Head of Claims, Head of Underwriting, Head of Distribution, PMO Lead. Use only the meeting recap, transcript and shared files. Do not add items not discussed. Do not attribute decisions that were not made. Deliver (1) a one paragraph tone check and meeting summary in board voice, (2) decisions register with decision, owner, effective date and rationale, (3) action register with action, owner, due date, priority (Urgent / Important / Medium / Low) and dependency, (4) parked items list with reason parked and the meeting where it will be revisited, (5) risks and escalations raised with owner and next step, (6) proposed draft communication to the wider leadership team, 150 words maximum, warm and clear. English, professional, ready to paste into an Outlook email and a Loop action tracker.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>From the most recent CGA Indonesia ExCo Teams meeting recap, produce an action register the CEO can send to the C-suite within one hour of the meeting</span> <span class="c"><span class="lbl">C</span>I am the Chief of Staff to the CEO. Attendees: CEO, COO, CFO, CTO, Head of Claims, Head of Underwriting, Head of Distribution, PMO Lead</span>. <span class="s"><span class="lbl">S</span>Use only the meeting recap, transcript and shared files. Do not add items not discussed. Do not attribute decisions that were not made</span>. <span class="e"><span class="lbl">E</span>Deliver (1) one paragraph tone check and summary in board voice, (2) decisions register (decision, owner, effective date, rationale), (3) action register (action, owner, due date, priority, dependency), (4) parked items list with reason and revisit date, (5) risks and escalations with owner and next step, (6) draft communication to wider leadership, 150 words maximum, warm and clear. English, ready to paste into Outlook and a Loop action tracker.</span></div>
+        <div class="callout"><b>Why Chat with Teams recap.</b> The recap keeps context of who said what, so the register is grounded in what was actually decided, not just what the AI could infer.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Copilot in Word · CEO and CFO</div>
+
+  <div class="steps">
+    <div class="step" data-step="l5" data-tab="leadership">
+      <div class="step-num"><span>5</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Leadership L5 · Copilot in Word</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#eef2ff;color:#3730a3;border-color:#a5b4fc">LEADERSHIP</span>
+        <h4>OJK regulatory response letter on the November claims TAT circular</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Copilot in Word</span><span class="arrow">→</span><span class="step-pill">Blank document</span><span class="arrow">→</span><span class="step-pill">Draft with Copilot</span><span class="arrow">→</span><span class="step-pill">Reference 08_CGA_OJK_Circular_Sample.docx and 04_CGA_ClaimsProcessTranscript.docx</span>
+        </div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Draft a formal OJK response letter for the CGA Indonesia CEO and CFO to sign, responding to the November 2026 OJK claims TAT circular. I am the Chief of Staff to the CEO of Contoso General Assurance Indonesia, drafting on behalf of the CEO and CFO. Audience: OJK non life insurance supervision directorate. Ground the letter in 08_CGA_OJK_Circular_Sample.docx (the OJK circular) and 04_CGA_ClaimsProcessTranscript.docx (as-is claims process). Preserve every regulatory reference verbatim. Do not invent authority limits or commitments. Structure: (1) formal Indonesian government letter header with reference number placeholder, (2) opening acknowledging OJK circular SEOJK 27/2026, (3) current CGA Indonesia claims TAT baseline per LOB with the survey source cited, (4) the CGA remediation plan in three phases (immediate, next 90 days, next 180 days) with concrete milestones, (5) governance and reporting cadence to OJK, (6) request for clarification on three specific circular clauses, (7) closing in the required formal register with signature blocks for CEO and CFO. Bilingual, Bahasa Indonesia primary followed by an English courtesy translation, formal register, no colloquialisms.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Draft a formal OJK response letter for the CGA Indonesia CEO and CFO to sign, responding to the November 2026 OJK claims TAT circular</span> <span class="c"><span class="lbl">C</span>Chief of Staff drafting for the CEO and CFO. Audience: OJK non life insurance supervision directorate</span>. <span class="s"><span class="lbl">S</span>Ground in 08_CGA_OJK_Circular_Sample.docx and 04_CGA_ClaimsProcessTranscript.docx. Preserve regulatory references verbatim. Do not invent commitments</span>. <span class="e"><span class="lbl">E</span>(1) formal government letter header, (2) opening acknowledging SEOJK 27/2026, (3) current TAT baseline per LOB with source cited, (4) three phase remediation plan with milestones, (5) governance and reporting cadence to OJK, (6) request for clarification on three circular clauses, (7) formal closing with CEO and CFO signature blocks. Bilingual, Bahasa Indonesia primary plus English courtesy translation, formal register.</span></div>
+        <div class="callout"><b>Why in Word.</b> Draft with Copilot writes the regulatory letter in place, preserves the verbatim circular text and produces bilingual output, ready for the legal team to review before signing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-sep premium">Copilot Cowork · Full C-suite</div>
+
+  <div class="steps">
+    <div class="step" data-step="l6" data-tab="leadership">
+      <div class="step-num"><span>6</span></div>
+      <div class="step-body">
+        <div class="step-check" onclick="toggleStep(this)"></div>
+        <span class="kicker">Leadership L6 · Copilot Cowork</span><span class="premium-pill">PREMIUM</span><span class="premium-pill" style="background:#eef2ff;color:#3730a3;border-color:#a5b4fc">LEADERSHIP</span>
+        <h4>Executive briefing pack for the CGA board pre-read in one workflow</h4>
+        <div class="nav-path">
+          <span class="label">Where to run</span>
+          <span class="step-pill">Microsoft 365 Copilot Chat</span><span class="arrow">→</span><span class="step-pill">Cowork panel</span><span class="arrow">→</span><span class="step-pill">Attach files</span><span class="arrow">→</span><span class="step-pill">Approve each artefact</span>
+        </div>
+<div class="prompt-plain"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span>Assemble the complete CGA Indonesia executive briefing pack for the November board pre-read in one workflow. Deliver five artefacts. I am the Chief of Staff to the CEO of Contoso General Assurance Indonesia. Audience: CEO, COO, CFO, CTO and independent directors. Use only 01_CGA_ProjectStatusReport.docx, 02_CGA_SteeringCommitteeBrief.docx, 03_CGA_RAID_Log.xlsx, 05_CGA_ClaimsOperationsSurvey.xlsx and 08_CGA_OJK_Circular_Sample.docx. Do not invent milestones, numbers or regulatory commitments. Show each artefact for my approval before moving on. Produce (1) a Word executive board memo, four pages, portfolio RAG status, top risks, financial impact summary from the Analyst view, OJK regulatory position and 3 decisions requested with recommended option, (2) a PowerPoint board deck, 15 slides with speaker notes, matching the executive memo, (3) an Excel Board KPI dashboard sheet with portfolio scorecard, RAID heatmap and financial scenario table, (4) a fully interactive HTML board pre-read microsite, mobile friendly, self contained in a single .html file with inline CSS and JavaScript, including working filters (programme, RAG, LOB), collapsible sections per programme, a top risks toggle, print button and CGA brand styling, (5) a draft Outlook email from the CEO to the board with the memo, deck and pre-read microsite attached, and a Teams meeting invite for the board meeting at 09:00 Jakarta time on the third Friday of November with agenda in the body. English, board voice, calm and factual.</div>
+<div class="prompt-gcse"><button class="copy-btn" onclick="cp(this)">Copy</button><span class="plabel">PROMPT</span><span class="g"><span class="lbl">G</span>Assemble the complete CGA Indonesia executive briefing pack for the November board pre-read in one workflow, delivering five artefacts (Word memo, PowerPoint deck, Excel dashboard, HTML pre-read microsite, Outlook email plus Teams invite)</span> <span class="c"><span class="lbl">C</span>Chief of Staff to the CEO. Audience: CEO, COO, CFO, CTO and independent directors</span>. <span class="s"><span class="lbl">S</span>Use only 01_CGA_ProjectStatusReport.docx, 02_CGA_SteeringCommitteeBrief.docx, 03_CGA_RAID_Log.xlsx, 05_CGA_ClaimsOperationsSurvey.xlsx and 08_CGA_OJK_Circular_Sample.docx. Do not invent milestones, numbers or regulatory commitments</span>. <span class="e"><span class="lbl">E</span>Show each artefact for approval before moving on. (1) Word executive board memo, four pages, portfolio RAG, top risks, Analyst financial impact, OJK position, three decisions with recommendation. (2) PowerPoint deck, 15 slides with speaker notes, matching the memo. (3) Excel Board KPI dashboard (scorecard, RAID heatmap, financial scenarios). (4) Interactive HTML board pre-read microsite, mobile friendly, self contained single .html file, filters (programme, RAG, LOB), collapsible sections, top risks toggle, print button, CGA brand styling. (5) Outlook email from CEO to the board with all attachments plus a Teams invite for the board meeting at 09:00 Jakarta time on the third Friday of November, agenda in body. English, board voice, calm and factual.</span></div>
+        <div class="callout"><b>Why Cowork.</b> Five artefacts, one prompt, one context. Cowork keeps the same story across Word, PowerPoint, Excel, HTML, Outlook and Teams and pauses for your approval before each artefact.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="complete-banner" id="leadership-complete">
+    <div class="check">✓</div>
+    <div>
+      <h4>Leadership complete.</h4>
+      <p>You have run six leadership grade Copilot activities across market intelligence, financial modelling, board decks, meeting follow up, regulatory writing and multi artefact assembly. Ready for Tips.</p>
+    </div>
+  </div>
+
+  <div class="lab-nav">
+    <button class="secondary" data-go="premium">← Back to Premium</button>
+    <button data-go="tips">Next: Tips →</button>
+  </div>
+</div>
+
 <!-- ============ TAB 5 · TIPS ============ -->
 <div class="view" id="view-tips">
   <div class="uc-header">
@@ -1032,7 +1203,7 @@ footer{text-align:center;padding:24px;color:var(--muted);font-size:12px;border-t
   <div class="callout warn"><b>What Copilot will not do for CGA.</b> Approve a claim, bind a policy, price a risk, replace an underwriter's judgement, or read data outside your Microsoft 365 tenant unless you connect it. Copilot accelerates the humans; it does not replace them.</div>
 
   <div class="lab-nav">
-    <button class="secondary" data-go="tips">← Back to Premium</button>
+    <button class="secondary" data-go="leadership">← Back to Leadership</button>
     <button disabled>Next →</button>
   </div>
 </div>
